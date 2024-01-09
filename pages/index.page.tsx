@@ -1,7 +1,9 @@
-import Image from 'next/image'
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import type { NextSeoProps } from 'next-seo'
 import { Inter, Poppins } from 'next/font/google'
 
-import { cn } from 'pages/global/utils/_cn'
+import { cn } from '@utils/cn'
+import { DEFAULT_OPENGRAPH_IMAGE } from '@constants/openGraphImages'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -16,7 +18,7 @@ const poppins = Poppins({
   display: 'swap',
 })
 
-export default function Home() {
+export default function HomePage({} : InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <main
       className={cn(
@@ -25,7 +27,36 @@ export default function Home() {
         poppins.variable,
       )}
     >
-      <div>Place Holder</div>
+      <div>Home Container</div>
     </main>
   )
 }
+
+export const getServerSideProps: GetServerSideProps<{}> = async ({ req }) => {
+  const nextSeoProps: NextSeoProps = {
+    title: 'Home - MySaves',
+    description: `Upload and Share YouTube Videos.`,
+    openGraph: {
+      title: 'Home - MySaves',
+      description: `Upload and Share YouTube Videos.`,
+      images: [
+        {
+          url: DEFAULT_OPENGRAPH_IMAGE,
+          alt: 'MySaves logo',
+        },
+      ],
+      site_name: 'MySaves',
+    },
+    twitter: {
+      site: '@mysaves',
+      cardType: 'summary_large_image',
+    },
+  }
+
+  return {
+    props: {
+      nextSeoProps,
+    },
+  }
+}
+
