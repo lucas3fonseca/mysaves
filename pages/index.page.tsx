@@ -5,6 +5,7 @@ import { Inter, Poppins } from 'next/font/google'
 import { cn } from '@utils/cn'
 import { DEFAULT_OPENGRAPH_IMAGE } from '@constants/openGraphImages'
 import { Header } from '@components/layouts/Header'
+import { HomeContainer } from 'src/home/components/HomeContainer'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,7 +21,6 @@ const poppins = Poppins({
 })
 
 export default function HomePage({} : InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log('index')
   return (
     <main
       className={cn(
@@ -29,7 +29,9 @@ export default function HomePage({} : InferGetServerSidePropsType<typeof getServ
         poppins.variable,
       )}
     >
-      <Header />
+      <Header>
+        <HomeContainer />
+      </Header>
     </main>
   )
 }
