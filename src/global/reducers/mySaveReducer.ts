@@ -1,5 +1,3 @@
-import * as short from 'short-uuid'
-
 import { GlobalContextState } from '../contexts/GlobalContext'
 
 export enum MySaveActionType {

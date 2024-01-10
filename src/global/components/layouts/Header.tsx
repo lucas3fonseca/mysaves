@@ -4,6 +4,8 @@ import * as React from 'react'
 
 import { ROUTES } from 'src/global/routes'
 
+import { CreateButtonView } from './CreateButtonView'
+
 const DEFAULT_TITLE = 'MySaves'
 
 interface HeaderProps {
@@ -27,6 +29,7 @@ export const Header = ({ title, children }: React.PropsWithChildren & HeaderProp
               <h1 className='text-black font-medium pl-5'>{title ? title : DEFAULT_TITLE}</h1>
             </div>
           </Link>
+          <CreateButtonView />
         </div>
       </header>
       {children}
