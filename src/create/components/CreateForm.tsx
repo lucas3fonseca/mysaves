@@ -1,13 +1,18 @@
+import { useState } from 'react'
+
 interface CreateFormProps {
-  onSubmit: (event: React.FormEvent) => void
+  onSubmit: (videoUrl: string, title: string, description: string) => void
   onCancel: () => void
 }
 
 export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
+  let [videoUrl, setVideoUrl] = useState('')
+  let [title, setTitle] = useState('')
+  let [description, setDescription] = useState('')
 
   const handleOnSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    onSubmit(event)
+    onSubmit(videoUrl, title, description)
   }
 
   return (
@@ -28,6 +33,7 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
                           focus:outline-none
                           focus:ring-0 sm:text-sm sm:leading-6'
                 placeholder='https://www.youtube.com/watch?v=hGxzzVer7x0'
+                onChange={(e: React.FormEvent<HTMLInputElement>) => setVideoUrl(e.currentTarget.value) }
               />
             </div>
           </div>
@@ -48,6 +54,7 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
                             focus:outline-none
                             focus:ring-0 sm:text-sm sm:leading-6'
                 placeholder='Title...'
+                onChange={(e: React.FormEvent<HTMLInputElement>) => setTitle(e.currentTarget.value) }
               />
             </div>
           </div>
@@ -64,7 +71,9 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
                         shadow-sm ring-slate-600
                         ring-1 ring-inset focus:ring-2
                         focus:outline-none
-                        focus:ring-inset sm:text-sm sm:leading-6' />
+                        focus:ring-inset sm:text-sm sm:leading-6'
+              onChange={(e: React.FormEvent<HTMLTextAreaElement>) => setDescription(e.currentTarget.value) }
+              />
           </div>
         </div>
       </div>

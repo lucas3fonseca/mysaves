@@ -8,7 +8,7 @@ export enum MySaveActionType {
 export interface MySaveCreatePayload {
   title: string
   description: string
-  video_url: string
+  videoUrl: string
 }
 
 export interface MySaveDeletePayload {
@@ -27,7 +27,7 @@ export const mySaveReducer = (
   if (action.kind === MySaveActionType.CREATE) {
     const { mySaves } = state
     const payload = action.payload as MySaveCreatePayload
-    const id = mySaves.length - 1 // the array element is it's ID, makes things simpler for now
+    const id = mySaves.length ? mySaves.length - 1 : 0 // the array element is it's ID, makes things simpler for now
 
     mySaves.push({
       id,

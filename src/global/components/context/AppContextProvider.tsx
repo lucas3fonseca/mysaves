@@ -8,10 +8,10 @@ export const AppContextProvider = ({ children }: React.PropsWithChildren) => {
   const [state, dispatch] = useReducer(mySaveReducer, { mySaves: [] }); // TODO: setup initial state at some point
 
   return (
-      <GlobalContext.Provider value={state}>
-          <MySaveDispatchContext.Provider value={dispatch}>
-              {children}
-          </MySaveDispatchContext.Provider>
-      </GlobalContext.Provider>
+    <GlobalContext.Provider value={state}>
+      <MySaveDispatchContext.Provider value={dispatch}>
+        {children}
+      </MySaveDispatchContext.Provider>
+    </GlobalContext.Provider>
   );
 }

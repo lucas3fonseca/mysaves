@@ -3,9 +3,10 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
 import { CreateForm } from './CreateForm'
+import { SaveInfo } from '../interfaces/create'
 
 interface CreateModalProps {
-  onSaveVideo: () => void
+  onSaveVideo: (saveInfo: SaveInfo) => void
 }
 
 export const CreateModal = ({ onSaveVideo }: CreateModalProps) => {
@@ -19,9 +20,13 @@ export const CreateModal = ({ onSaveVideo }: CreateModalProps) => {
     setIsOpen(true)
   }
 
-  const saveVideo = () => {
+  const saveVideo = (videoUrl: string, title: string, description: string) => {
     closeModal()
-    onSaveVideo()
+    onSaveVideo({
+      videoUrl,
+      title,
+      description,
+    })
   }
 
   return (

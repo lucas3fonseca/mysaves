@@ -4,7 +4,7 @@ export interface MySave {
   id: number,
   title: string,
   description: string,
-  video_url: string,
+  videoUrl: string,
   deleted: boolean, // we'll see if this works well
 }
 
