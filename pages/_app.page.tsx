@@ -6,6 +6,8 @@ import { NextSeo } from 'next-seo'
 import type { NextSeoProps } from 'next-seo'
 import NextNProgress from 'nextjs-progressbar'
 
+import { AppContextProvider } from 'src/global/components/context/AppContextProvider'
+
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
   TInitialProps = TProps,
@@ -18,18 +20,17 @@ type AppPropsWithLayout = NextAppProps<{ nextSeoProps?: NextSeoProps }> & {
 }
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  console.log('App')
   const getLayout =
     Component.getLayout ??
     ((page) => <>{page}</>)
 
   return (
-    <>
+    <AppContextProvider>
       <NextNProgress color='#00CC9B' options={{ showSpinner: false }} />
       {pageProps.nextSeoProps ? (
         <NextSeo {...pageProps.nextSeoProps} />
       ) : null}
       {getLayout(<Component {...pageProps} />)}
-    </>
+    </AppContextProvider>
   )
 }
