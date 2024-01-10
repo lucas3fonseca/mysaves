@@ -9,9 +9,18 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
   let [videoUrl, setVideoUrl] = useState('')
   let [title, setTitle] = useState('')
   let [description, setDescription] = useState('')
+  let [submitted, setSubmitted] = useState(false)
+
+  const disabled = (
+    videoUrl.length === 0 ||
+    title.length === 0 ||
+    description.length === 0 ||
+    submitted
+  )
 
   const handleOnSubmit = (event: React.FormEvent) => {
     event.preventDefault()
+    setSubmitted(true)
     onSubmit(videoUrl, title, description)
   }
 
@@ -33,7 +42,7 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
                           focus:outline-none
                           focus:ring-0 sm:text-sm sm:leading-6'
                 placeholder='https://www.youtube.com/watch?v=hGxzzVer7x0'
-                onChange={(e: React.FormEvent<HTMLInputElement>) => setVideoUrl(e.currentTarget.value) }
+                onChange={(e: React.FormEvent<HTMLInputElement>) => setVideoUrl(e.currentTarget.value)}
               />
             </div>
           </div>
@@ -54,7 +63,7 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
                             focus:outline-none
                             focus:ring-0 sm:text-sm sm:leading-6'
                 placeholder='Title...'
-                onChange={(e: React.FormEvent<HTMLInputElement>) => setTitle(e.currentTarget.value) }
+                onChange={(e: React.FormEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)}
               />
             </div>
           </div>
@@ -72,26 +81,28 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
                         ring-1 ring-inset focus:ring-2
                         focus:outline-none
                         focus:ring-inset sm:text-sm sm:leading-6'
-              onChange={(e: React.FormEvent<HTMLTextAreaElement>) => setDescription(e.currentTarget.value) }
-              />
+              onChange={(e: React.FormEvent<HTMLTextAreaElement>) => setDescription(e.currentTarget.value)}
+            />
           </div>
         </div>
       </div>
 
       <div className='mt-6 flex items-center justify-center gap-x-6'>
-        <button type='button' 
+        <button type='button'
           className='text-sm font-semibold leading-6 
-                  text-black bg-red-300 border border-slate-300 rounded-md
-                  hover:bg-red-400 px-2 py-1 
-                    focus-visible:outline-2 focus-visible:outline-offset-2'
+          text-black bg-red-300 border border-slate-300 rounded-md
+          hover:bg-red-400 px-2 py-1 
+            focus-visible:outline-2 focus-visible:outline-offset-2'
           onClick={onCancel}
         >
           Cancel
         </button>
         <button type='submit'
+          disabled={disabled}
           className='rounded-md bg-slate-300 px-3 py-2 text-sm font-semibold 
-                text-black hover:bg-slate-500 focus-visible:outline
-                  focus-visible:outline-2 focus-visible:outline-offset-2'
+          text-black enabled:hover:bg-slate-500 focus-visible:outline
+            focus-visible:outline-2 focus-visible:outline-offset-2
+          disabled:text-slate-100 disabled:cursor-not-allowed'
         >
           Save
         </button>
