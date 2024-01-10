@@ -4,7 +4,7 @@ import * as React from 'react'
 
 import { ROUTES } from 'src/global/routes'
 
-import { CreateButtonView } from './CreateButtonView'
+import { CreateContainer } from 'src/create/components/CreateContainer'
 
 const DEFAULT_TITLE = 'MySaves'
 
@@ -29,7 +29,7 @@ export const Header = ({ title, children }: React.PropsWithChildren & HeaderProp
               <h1 className='text-black font-medium pl-5'>{title ? title : DEFAULT_TITLE}</h1>
             </div>
           </Link>
-          <CreateButtonView />
+          <CreateContainer />
         </div>
       </header>
       {children}

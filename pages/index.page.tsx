@@ -1,46 +1,22 @@
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import type { NextSeoProps } from 'next-seo'
-import { Inter, Poppins } from 'next/font/google'
 
-import { cn } from '@utils/cn'
 import { DEFAULT_OPENGRAPH_IMAGE } from '@constants/openGraphImages'
-import { Header } from '@components/layouts/Header'
 import { HomeLayout } from 'src/home/components/HomeLayout'
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-})
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins',
-  display: 'swap',
-})
-
-export default function HomePage({} : InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function HomePage({ }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <main
-      className={cn(
-        'min-h-screen font-sans antialiased',
-        inter.variable,
-        poppins.variable,
-      )}
-    >
-      <HomeLayout />
-    </main>
+    <HomeLayout />
   )
 }
 
 export const getServerSideProps: GetServerSideProps<{}> = async ({ req }) => {
   const nextSeoProps: NextSeoProps = {
-    title: 'Home - MySaves',
-    description: `Upload and Share YouTube Videos.`,
+    title: 'MySaves - Home',
+    description: `Upload and share any YouTube Video.`,
     openGraph: {
-      title: 'Home - MySaves',
-      description: `Upload and Share YouTube Videos.`,
+      title: 'MySaves - Home',
+      description: `Upload and share any YouTube Video.`,
       images: [
         {
           url: DEFAULT_OPENGRAPH_IMAGE,
