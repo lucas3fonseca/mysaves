@@ -20,30 +20,30 @@ export interface MySaveAction {
   payload: MySaveCreatePayload | MySaveDeletePayload
 }
 
-export const mySaveReducer = (
-  state: GlobalContextState,
-  action: MySaveAction,
-): GlobalContextState => {
-  if (action.kind === MySaveActionType.CREATE) {
-    const { mySaves } = state
-    const payload = action.payload as MySaveCreatePayload
-    const id = mySaves.length ? mySaves.length - 1 : 0 // the array element is it's ID, makes things simpler for now
+// export const mySaveReducer = (
+//   state: GlobalContextState,
+//   action: MySaveAction,
+// ): GlobalContextState => {
+//   if (action.kind === MySaveActionType.CREATE) {
+//     const { mySaves } = state
+//     const payload = action.payload as MySaveCreatePayload
+//     const id = mySaves.length ? mySaves.length - 1 : 0 // the array element is it's ID, makes things simpler for now
 
-    mySaves.push({
-      id,
-      deleted: false,
-      ...payload,
-    })
-    return { mySaves }
-  }
+//     mySaves.push({
+//       id,
+//       deleted: false,
+//       ...payload,
+//     })
+//     return { mySaves }
+//   }
 
-  if (action.kind === MySaveActionType.DELETE) {
-    const { mySaves } = state
-    const payload = action.payload as MySaveDeletePayload
-    mySaves[payload.id].deleted = true
+//   if (action.kind === MySaveActionType.DELETE) {
+//     const { mySaves } = state
+//     const payload = action.payload as MySaveDeletePayload
+//     mySaves[payload.id].deleted = true
 
-    return { mySaves }
-  }
+//     return { mySaves }
+//   }
 
-  return state
-}
+//   return state
+// }

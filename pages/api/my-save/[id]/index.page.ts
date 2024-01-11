@@ -1,45 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { MySave, MySaveInfo } from '@/pages/global/interfaces'
-import { generateMySave } from '../../_utils/createMySave'
-import { state } from '../../_utils/state'
-
-enum HttpRequestMethods {
-  POST = 'POST',
-  GET = 'GET',
-}
+import { MySave, HttpRequestMethods } from '@/pages/global/interfaces'
+import { MySaveError, MySaveErrorType } from '../../_utils/MySaveError'
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<MySave | null>
+  res: NextApiResponse<MySave | MySaveError>
 ) {
   const id = req.query.id as string
-  const mySaveInfo = req.body as MySaveInfo
 
   if (!id || typeof id !== 'string') {
-    res.status(404).json(null)
+    res.status(404).json(new MySaveError(`Id not found: ${id}`, MySaveErrorType.MySaveNotFound))
   }
 
-  if (req.method === HttpRequestMethods.POST) {
-
-    try {
-      const mySave = await generateMySave(id, mySaveInfo)
-      state[id] = mySave
-
-      res.status(200).json(mySave)
-
-    } catch (error) {
-      res.status(500).json(null)
-    }
-
-  } else {
-    const mySave = state[id]
-
+  if (req.method === HttpRequestMethods.GET) {
+    const mySave = global.state[id]
     if (!mySave) {
-      res.status(404).json(null)
+      res.status(404).json(new MySaveError(`Id not found: ${id}`, MySaveErrorType.MySaveNotFound))
     }
 
     res.status(200).json(mySave)
+  } else {
+    res.status(404).json(new MySaveError(`Internal server error`, MySaveErrorType.MySaveInternalServerError))
   }
-  
 }

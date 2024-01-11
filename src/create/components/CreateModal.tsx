@@ -6,10 +6,11 @@ import { CreateForm } from './CreateForm'
 import { SaveInfo } from '../interfaces/create'
 
 interface CreateModalProps {
-  onSaveVideo: (saveInfo: SaveInfo) => void
+  onSaveVideo: (videoUrl: string, title: string, description: string) => void
+  error?: string,
 }
 
-export const CreateModal = ({ onSaveVideo }: CreateModalProps) => {
+export const CreateModal = ({ onSaveVideo, error }: CreateModalProps) => {
   let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
@@ -22,11 +23,11 @@ export const CreateModal = ({ onSaveVideo }: CreateModalProps) => {
 
   const saveVideo = (videoUrl: string, title: string, description: string) => {
     closeModal()
-    onSaveVideo({
+    onSaveVideo(
       videoUrl,
       title,
       description,
-    })
+    )
   }
 
   return (

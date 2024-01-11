@@ -1,3 +1,8 @@
+export enum HttpRequestMethods {
+  POST = 'POST',
+  GET = 'GET',
+}
+
 export interface YoutubeVideoThumbnail {
   url: string
   width: number
@@ -21,6 +26,7 @@ export interface MySaveInfo { // app specific data
   title: string
   description: string
   videoUrl: string
+  videoId: string
 }
 
 export interface MySave extends MySaveInfo {

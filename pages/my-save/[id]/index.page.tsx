@@ -7,7 +7,7 @@ import { settings } from '@/pages/global/settings'
 import { MySave } from '@/pages/global/interfaces'
 
 interface MySavePageQuery extends ParsedUrlQuery {
-  mySaveSlug: string
+  id: string
 }
 
 interface MySavePageProps {
@@ -27,13 +27,13 @@ export const getServerSideProps: GetServerSideProps<
   MySavePageProps,
   MySavePageQuery
 > = async ({ params }) => {
-  const { mySaveSlug } = params ?? {}
+  const { id } = params ?? {}
 
-  if (!mySaveSlug) {
+  if (!id) {
     return { notFound: true }
   }
   
-  const res = await axios.get(`${settings.API_BASE_URL}/my-save/${mySaveSlug}`)
+  const res = await axios.get(`${settings.API_BASE_URL}/my-save/${id}`)
 
   if (res.status !== 200) {
     return { notFound: true }
@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps<
 
   return {
     props: {
-      mySaveSlug,
+      mySaveSlug: id,
       nextSeoProps,
       mySave,
     },
