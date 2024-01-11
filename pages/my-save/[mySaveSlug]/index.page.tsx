@@ -16,10 +16,11 @@ interface MySavePageProps {
   mySaveSlug: string
 }
 
-export default function MySavePage({ mySaveSlug }: MySavePageProps) {
+export default function MySavePage({ mySaveSlug, id }: MySavePageProps) {
   return (
     <div>
       {mySaveSlug}
+      {id}
     </div>
   )
 }
@@ -62,7 +63,7 @@ export const getServerSideProps: GetServerSideProps<
     props: {
       mySaveSlug,
       nextSeoProps,
-      id: '1',
+      id: data,
     },
   }
 }
