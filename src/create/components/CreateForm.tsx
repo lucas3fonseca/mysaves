@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+// TODO: add user validation
+
 interface CreateFormProps {
   onSubmit: (videoUrl: string, title: string, description: string) => void
   onCancel: () => void
