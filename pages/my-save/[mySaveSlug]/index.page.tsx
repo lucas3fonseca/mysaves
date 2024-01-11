@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<
 
   const res = await axios.get(settings.API_URL)
   const data = res.data
-  console.log('res: ', data)
+  console.log('### res: ', data)
 
   const nextSeoProps: NextSeoProps = {
     title: `MySaves TODO: add title from server props`,
