@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps<
     return { notFound: true }
   }
 
-  const res = await axios.get(settings.API_URL)
+  const res = await axios.get(settings.API_BASE_URL)
   const data = res.data
   console.log('### res: ', data)
 

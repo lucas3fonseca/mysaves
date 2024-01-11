@@ -1,17 +1,24 @@
-import { useReducer } from 'react'
+import { Dispatch, ReactNode, useReducer } from 'react'
 
-import { GlobalContext } from '../../contexts/GlobalContext'
+import { GlobalContext, GlobalContextState } from '../../contexts/GlobalContext'
 import { MySaveDispatchContext } from '../../contexts/MySaveDispatchContext'
-import { mySaveReducer } from '../../reducers/mySaveReducer'
+import { MySaveAction } from '../../reducers/mySaveReducer'
 
-export const AppContextProvider = ({ children }: React.PropsWithChildren) => {
-  const [state, dispatch] = useReducer(mySaveReducer, { mySaves: [] }); // TODO: setup initial state at some point
+interface AppContextProviderProps extends React.PropsWithChildren {
+  state: GlobalContextState
+  // dispatch: Dispatch<MySaveAction>
+  children: ReactNode
+}
+
+export const AppContextProvider = ({ state, children }: AppContextProviderProps) => {
+  // const [state, dispatch] = useReducer(mySaveReducer, {}); // TODO: maybe add this back later
+  // <MySaveDispatchContext.Provider value={dispatch}>
+  // {children}
+  // </MySaveDispatchContext.Provider>
 
   return (
     <GlobalContext.Provider value={state}>
-      <MySaveDispatchContext.Provider value={dispatch}>
-        {children}
-      </MySaveDispatchContext.Provider>
+      {children}
     </GlobalContext.Provider>
   );
 }
