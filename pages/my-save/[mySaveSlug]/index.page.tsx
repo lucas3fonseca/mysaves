@@ -33,8 +33,8 @@ export const getServerSideProps: GetServerSideProps<
     return { notFound: true }
   }
 
-  const res = await axios.get('http://localhost:3000/api')
-  const data = res.data
+  // const res = await axios.get('http://localhost:3000/api')
+  // const data = res.data
   console.log('res: ', process.env.NODE_ENV)
 
   const nextSeoProps: NextSeoProps = {
