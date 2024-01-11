@@ -1,2 +1,2 @@
 export const DEFAULT_OPENGRAPH_IMAGE =
-  'https://i.ytimg.com/vi/BcpZUSbaiO4/mqdefault.jpg'
+  'https://i.ytimg.com/vi/BcpZUSbaiO4/sddefault.jpg'
