@@ -1,6 +1,7 @@
 import { ParsedUrlQuery } from 'querystring'
 import { GetServerSideProps } from 'next'
 import type { NextSeoProps } from 'next-seo'
+import axios from 'axios'
 
 import { DEFAULT_OPENGRAPH_IMAGE } from '@constants/openGraphImages'
 
@@ -10,6 +11,7 @@ interface MySavePageQuery extends ParsedUrlQuery {
 
 interface MySavePageProps {
   nextSeoProps: NextSeoProps
+  id: string
   mySaveSlug: string
 }
 
@@ -22,7 +24,7 @@ export default function MySavePage({ mySaveSlug }: MySavePageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps<
-MySavePageProps,
+  MySavePageProps,
   MySavePageQuery
 > = async ({ params }) => {
   const { mySaveSlug } = params ?? {}
@@ -30,6 +32,10 @@ MySavePageProps,
   if (!mySaveSlug) {
     return { notFound: true }
   }
+
+  const res = await axios.get('http://localhost:3000/api')
+  const data = res.data
+  console.log('res: ', process.env.NODE_ENV)
 
   const nextSeoProps: NextSeoProps = {
     title: `MySaves TODO: add title from server props`,
@@ -55,6 +61,7 @@ MySavePageProps,
     props: {
       mySaveSlug,
       nextSeoProps,
+      id: '1',
     },
   }
 }
