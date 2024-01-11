@@ -1,12 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-  id: string
-}
+import { state, AppState } from '../_utils/state'
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<AppState>
 ) {
-  res.status(200).json({ id: 'John Doe' })
+  res.status(200).json(state)
 }
