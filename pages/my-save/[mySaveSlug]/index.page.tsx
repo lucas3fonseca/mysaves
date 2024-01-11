@@ -3,8 +3,8 @@ import { GetServerSideProps } from 'next'
 import type { NextSeoProps } from 'next-seo'
 import axios from 'axios'
 
-import { DEFAULT_OPENGRAPH_IMAGE } from '@constants/openGraphImages'
 import { settings } from '@/pages/global/settings'
+import { MySave } from '@/pages/global/interfaces'
 
 interface MySavePageQuery extends ParsedUrlQuery {
   mySaveSlug: string
@@ -12,15 +12,13 @@ interface MySavePageQuery extends ParsedUrlQuery {
 
 interface MySavePageProps {
   nextSeoProps: NextSeoProps
-  id: string
-  mySaveSlug: string
+  mySave: MySave
 }
 
-export default function MySavePage({ mySaveSlug, id }: MySavePageProps) {
+export default function MySavePage({ mySave }: MySavePageProps) {
   return (
     <div>
-      <div>{mySaveSlug}</div>
-      <div>{id}</div>
+      <div>{JSON.stringify(mySave)}</div>
     </div>
   )
 }
@@ -34,21 +32,25 @@ export const getServerSideProps: GetServerSideProps<
   if (!mySaveSlug) {
     return { notFound: true }
   }
+  
+  const res = await axios.get(`${settings.API_BASE_URL}/my-save/${mySaveSlug}`)
 
-  const res = await axios.get(settings.API_BASE_URL)
-  const data = res.data
-  console.log('### res: ', data)
+  if (res.status !== 200) {
+    return { notFound: true }
+  }
+
+  const mySave: MySave = res.data
 
   const nextSeoProps: NextSeoProps = {
-    title: `MySaves TODO: add title from server props`,
-    description: `TODO: add description from server props`,
+    title: `MySaves ${mySave.title}`,
+    description: `${mySave.description}`,
     openGraph: {
-      title: `MySaves TODO: add title from server props`,
-      description: `Check on the progress of the Creator League and view event brackets from erena.`,
+      title: `MySaves ${mySave.title}`,
+      description: `${mySave.description}`,
       images: [
         {
-          url: DEFAULT_OPENGRAPH_IMAGE,
-          alt: 'MySaves',
+          url: `${mySave.metadata.snippet.thumbnails.standard}`,
+          alt: `${mySave.metadata.snippet.title}`,
         },
       ],
       site_name: 'MySaves',
@@ -63,7 +65,7 @@ export const getServerSideProps: GetServerSideProps<
     props: {
       mySaveSlug,
       nextSeoProps,
-      id: data.id,
+      mySave,
     },
   }
 }

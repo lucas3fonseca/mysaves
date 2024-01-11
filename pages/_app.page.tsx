@@ -25,7 +25,7 @@ type AppPropsWithLayout = NextAppProps<{ nextSeoProps?: NextSeoProps }> & {
 }
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const [{ data, loading, error }, refetch] = useAxios(
+  const [{ data, loading, error }] = useAxios(
     `${settings.API_BASE_URL}/my-saves`
   )
 
