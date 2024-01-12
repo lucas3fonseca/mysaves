@@ -22,12 +22,12 @@ export const CreateModal = ({ onSaveVideo, error }: CreateModalProps) => {
   }
 
   const saveVideo = (videoUrl: string, title: string, description: string) => {
-    closeModal()
     onSaveVideo(
       videoUrl,
       title,
       description,
     )
+    closeModal()
   }
 
   return (

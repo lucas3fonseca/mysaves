@@ -3,13 +3,15 @@ import slugify from 'slugify'
 import type { UploadApiResponse } from 'cloudinary'
 
 import type {
+  CloudinaryImage,
   MySave,
   MySaveInfo,
   YoutubeVideoMetadata,
-} from '@/pages/global/interfaces'
-import cloudinary from '@/src/global/utils/cloudinary'
+} from '../../global/interfaces'
+import cloudinary from './cloudinary'
 import { settings } from '../settings'
 import { MySaveError, MySaveErrorType } from './MySaveError'
+import { getBase64ImageUrl } from './generateBlurPlaceholder'
 
 export const generateMySave = async (
   id: string,
@@ -39,22 +41,30 @@ export const generateMySave = async (
     strict: true,
   })
 
-  const uploaderRes: UploadApiResponse = await cloudinary.uploader.upload(youtubeThumbnail.url, {
-    public_id: slug,
-  })
+  const uploaderRes: UploadApiResponse = await cloudinary.uploader.upload(
+    youtubeThumbnail.url,
+    {
+      public_id: slug,
+    },
+  )
 
-  console.log(uploaderRes)
+
+  const image: CloudinaryImage = {
+    height: uploaderRes.height,
+    width: uploaderRes.width,
+    publicId: uploaderRes.public_id,
+    secureUrl: uploaderRes.secure_url,
+    format: uploaderRes.format,
+  }
+
+  const blurImage = await getBase64ImageUrl(image)
+  image.blurDataUrl = blurImage
 
   const mySave: MySave = {
     id,
     ...info,
     deleted: false,
-    cloudinaryThumbnail: {
-      height: uploaderRes.height,
-      width: uploaderRes.width,
-      publicId: uploaderRes.public_id,
-      secureUrl: uploaderRes.secure_url,
-    },
+    cloudinaryThumbnail: image,
     metadata: {
       id: youtubeMetadata.id,
       snippet: {

@@ -1,11 +1,11 @@
 import { Header } from '@components/layouts/Header'
 
-import { HomeContainer } from './HomeContainer'
+import { HomeView } from './HomeView'
 
 export const HomeLayout = () => {
   return (
     <Header>
-      <HomeContainer />
+      <HomeView />
     </Header>
   )
 }

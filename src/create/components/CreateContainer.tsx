@@ -1,11 +1,16 @@
 import useAxios from 'axios-hooks'
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 
-import { CreateModal } from './CreateModal'
 import { settings } from '@/pages/global/settings'
 import type { MySave, MySaveInfo } from '@/pages/global/interfaces'
 import { ROUTES } from '@/src/global/routes'
+import { GlobalDispatchContext } from '@/src/global/contexts/GlobalDispatchContext'
+import { GlobalContext } from '@/src/global/contexts/GlobalContext'
+
+import { CreateModal } from './CreateModal'
+
+
 
 const YOUTUBE_VIDEO_URL_IDENTIFIER = 'watch?v='
 const YOUTUBE_SHORT_URL_IDENTIFIER = 'shorts/'
@@ -37,7 +42,10 @@ const parseIdFromUrl = (url: string): string | null => {
 
 export const CreateContainer = () => {
   const router = useRouter()
+  const appState = useContext(GlobalContext)
+  const dispatch = useContext(GlobalDispatchContext)
   const [urlError, setUrlError] = useState<null | string>(null)
+  const [newMySave, setNewMySave] = useState<null | MySave>(null)
   const [{ data, loading, error }, executePost] =
     useAxios<MySave>(
       {
@@ -67,8 +75,19 @@ export const CreateContainer = () => {
       data: mySaveInfo,
     })
 
-    router.push(`${ROUTES.MY_SAVE}/${mySave.data.id}`)
+    if (!mySave) {
+      return
+    }
+    setNewMySave(mySave.data)
   }
+
+  useEffect(() => {
+    if (newMySave) {
+      appState[newMySave.id] = newMySave
+      dispatch(appState)
+      router.push(`${ROUTES.MY_SAVE}/${newMySave.id}`)
+    }
+  }, [newMySave, dispatch, appState, router])
 
   return <CreateModal onSaveVideo={saveVideo} error={urlError || error?.message} />
 }

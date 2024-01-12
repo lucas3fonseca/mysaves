@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps as NextAppProps } from 'next/app'
-import { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode, useState } from 'react'
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
 import type { NextSeoProps } from 'next-seo'
@@ -8,10 +8,10 @@ import NextNProgress from 'nextjs-progressbar'
 import useAxios from 'axios-hooks'
 
 import { cn } from '@utils/cn'
-import { AppContextProvider } from 'src/global/components/context/AppContextProvider'
+import { AppContextProvider } from '@/src/global/components/context/AppContextProvider'
 import { poppins } from './global/fonts'
 import { settings } from './global/settings'
-import { GlobalContextState } from '@/src/global/contexts/GlobalContext'
+import { AppState } from './global/interfaces'
 
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     ((page) => <>{page}</>)
 
   return (
-    <AppContextProvider state={data as GlobalContextState}>
+    <AppContextProvider state={data as AppState}>
       <NextNProgress color='#00CC9B' options={{ showSpinner: false }} />
       {pageProps.nextSeoProps ? (
         <NextSeo {...pageProps.nextSeoProps} />
