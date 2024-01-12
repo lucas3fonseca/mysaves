@@ -49,7 +49,7 @@ export const getServerSideProps: GetServerSideProps<
       description: `${mySave.description}`,
       images: [
         {
-          url: `${mySave.metadata.snippet.thumbnails.standard}`,
+          url: `${mySave.metadata.snippet.thumbnails.standard.url}`,
           alt: `${mySave.metadata.snippet.title}`,
         },
       ],
