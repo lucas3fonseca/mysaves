@@ -1,8 +1,8 @@
 import { Dispatch, ReactNode, useReducer } from 'react'
 
 import { GlobalContext, GlobalContextState } from '../../contexts/GlobalContext'
-import { MySaveDispatchContext } from '../../contexts/MySaveDispatchContext'
-import { MySaveAction } from '../../reducers/mySaveReducer'
+import type { MySaveDispatchContext } from '../../contexts/MySaveDispatchContext'
+import type { MySaveAction } from '../../reducers/mySaveReducer'
 
 interface AppContextProviderProps extends React.PropsWithChildren {
   state: GlobalContextState

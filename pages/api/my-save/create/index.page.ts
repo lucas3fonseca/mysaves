@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import shortUUID from 'short-uuid'
 
-import { MySave, MySaveInfo } from '@/pages/global/interfaces'
+import type { MySave, MySaveInfo } from '@/pages/global/interfaces'
 import { generateMySave } from '../../_utils/generateMySave'
 import {
   MySaveError,
@@ -28,6 +28,7 @@ export default async function handler(
       res.status(200).json(mySave)
       
     } catch (error: unknown) {
+      console.error(error)
       if (error instanceof MySaveError) {
         res.status(500).json({ error: error.message })
       } else {

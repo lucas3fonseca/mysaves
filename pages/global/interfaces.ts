@@ -29,9 +29,17 @@ export interface MySaveInfo { // app specific data
   videoId: string
 }
 
+export interface CloudinaryThumbnail {
+  publicId: string
+  width: number
+  height: number
+  secureUrl: string
+}
+
 export interface MySave extends MySaveInfo {
   id: string
   deleted: boolean // we'll see if this works well
+  cloudinaryThumbnail: CloudinaryThumbnail
   metadata: YoutubeVideoMetadata
 }
 

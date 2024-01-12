@@ -1,4 +1,4 @@
-import { MySave } from '@/pages/global/interfaces'
+import type { MySave } from '@/pages/global/interfaces'
 import { Header } from '@components/layouts/Header'
 
 import { MySaveContainer } from './MySaveContainer'

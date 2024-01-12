@@ -4,23 +4,34 @@ import { useRouter } from 'next/router'
 
 import { CreateModal } from './CreateModal'
 import { settings } from '@/pages/global/settings'
-import { MySave, MySaveInfo } from '@/pages/global/interfaces'
+import type { MySave, MySaveInfo } from '@/pages/global/interfaces'
 import { ROUTES } from '@/src/global/routes'
 
-const YOUTUBE_URL_IDENTIFIER = 'watch?v='
-const YOUTUBE_URL_FORMAT = 'https://www.youtube.com/watch?v='
+const YOUTUBE_VIDEO_URL_IDENTIFIER = 'watch?v='
+const YOUTUBE_SHORT_URL_IDENTIFIER = 'shorts/'
+const YOUTUBE_VIDEO_URL_FORMAT = 'https://youtube.com/watch?v='
+const YOUTUBE_SHORT_URL_FORMAT = 'https://youtube.com/shorts/'
 
+// Probably use a regex for this in the future
 const parseIdFromUrl = (url: string): string | null => {
-  
-  if (!url.includes(YOUTUBE_URL_FORMAT)) {
+  url = url.replace('www.', '')
+  const is_video = url.includes(YOUTUBE_VIDEO_URL_FORMAT) ? true : false
+  const is_short = url.includes(YOUTUBE_SHORT_URL_FORMAT) ? true : false
+
+  if (!is_video && !is_short) {
     return null
   }
 
-  const parts = url.split(YOUTUBE_URL_IDENTIFIER)
+  const parts = (
+    is_video ?
+      url.split(YOUTUBE_VIDEO_URL_IDENTIFIER) :
+      url.split(YOUTUBE_SHORT_URL_IDENTIFIER)
+  )
+
   if (parts.length < 2) {
     return null
   } else {
-    return parts[1]
+    return parts.pop() ?? null
   }
 }
 
@@ -58,8 +69,6 @@ export const CreateContainer = () => {
 
     router.push(`${ROUTES.MY_SAVE}/${mySave.data.id}`)
   }
-
-  console.log(data)
 
   return <CreateModal onSaveVideo={saveVideo} error={urlError || error?.message} />
 }

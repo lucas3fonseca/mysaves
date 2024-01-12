@@ -1,4 +1,4 @@
-import { MySave } from '@/pages/global/interfaces'
+import type { MySave } from '@/pages/global/interfaces'
 
 import { MySaveView } from './MySaveView'
 

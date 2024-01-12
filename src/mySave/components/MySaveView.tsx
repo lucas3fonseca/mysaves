@@ -1,6 +1,6 @@
 import ReactPlayer from 'react-player/lazy'
 
-import { MySave } from '@/pages/global/interfaces'
+import type { MySave } from '@/pages/global/interfaces'
 
 interface MySaveViewProps {
   mySave: MySave

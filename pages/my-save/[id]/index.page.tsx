@@ -4,9 +4,8 @@ import type { NextSeoProps } from 'next-seo'
 import axios from 'axios'
 
 import { settings } from '@/pages/global/settings'
-import { MySave } from '@/pages/global/interfaces'
+import type { MySave } from '@/pages/global/interfaces'
 import { MySaveLayout } from '@/src/mySave/components/MySaveLayout'
-
 
 interface MySavePageQuery extends ParsedUrlQuery {
   id: string
@@ -32,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<
   if (!id) {
     return { notFound: true }
   }
-  
+
   const res = await axios.get(`${settings.API_BASE_URL}/my-save/${id}`)
 
   if (res.status !== 200) {
@@ -42,10 +41,10 @@ export const getServerSideProps: GetServerSideProps<
   const mySave: MySave = res.data
 
   const nextSeoProps: NextSeoProps = {
-    title: `MySaves ${mySave.title}`,
+    title: `MySaves | ${mySave.title}`,
     description: `${mySave.description}`,
     openGraph: {
-      title: `MySaves ${mySave.title}`,
+      title: `MySaves | ${mySave.title}`,
       description: `${mySave.description}`,
       images: [
         {
