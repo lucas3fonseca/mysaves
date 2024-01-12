@@ -5,6 +5,8 @@ import axios from 'axios'
 
 import { settings } from '@/pages/global/settings'
 import { MySave } from '@/pages/global/interfaces'
+import { MySaveLayout } from '@/src/mySave/components/MySaveLayout'
+
 
 interface MySavePageQuery extends ParsedUrlQuery {
   id: string
@@ -17,9 +19,7 @@ interface MySavePageProps {
 
 export default function MySavePage({ mySave }: MySavePageProps) {
   return (
-    <div>
-      <div>{JSON.stringify(mySave)}</div>
-    </div>
+    <MySaveLayout mySave={mySave} />
   )
 }
 

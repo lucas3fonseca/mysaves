@@ -1,5 +1,5 @@
 export const ROUTES = {
   HOME: '/',
-  MY_SAVE: '/mysave',
+  MY_SAVE: '/my-save',
   CREATE: '/create',
 }

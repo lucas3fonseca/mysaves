@@ -1,9 +1,11 @@
 import useAxios from 'axios-hooks'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import { CreateModal } from './CreateModal'
 import { settings } from '@/pages/global/settings'
 import { MySave, MySaveInfo } from '@/pages/global/interfaces'
+import { ROUTES } from '@/src/global/routes'
 
 const YOUTUBE_URL_IDENTIFIER = 'watch?v='
 const YOUTUBE_URL_FORMAT = 'https://www.youtube.com/watch?v='
@@ -23,6 +25,7 @@ const parseIdFromUrl = (url: string): string | null => {
 }
 
 export const CreateContainer = () => {
+  const router = useRouter()
   const [urlError, setUrlError] = useState<null | string>(null)
   const [{ data, loading, error }, executePost] =
     useAxios<MySave>(
@@ -34,7 +37,7 @@ export const CreateContainer = () => {
     )
 
 
-  const saveVideo = (videoUrl: string, title: string, description: string) => {
+  const saveVideo = async (videoUrl: string, title: string, description: string) => {
     const parsedId = parseIdFromUrl(videoUrl)
 
     if (!parsedId) {
@@ -49,9 +52,11 @@ export const CreateContainer = () => {
       videoId: parsedId,
     }
 
-    executePost({
+    const mySave = await executePost({
       data: mySaveInfo,
     })
+
+    router.push(`${ROUTES.MY_SAVE}/${mySave.data.id}`)
   }
 
   console.log(data)
