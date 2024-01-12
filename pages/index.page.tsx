@@ -5,11 +5,6 @@ import { ParsedUrlQuery } from 'querystring'
 import { DEFAULT_OPENGRAPH_IMAGE } from '@constants/openGraphImages'
 import { HomeLayout } from '@/src/home/components/HomeLayout'
 
-// init state -- only for demo purposes
-if (!global.state) {
-  global.state = {}
-}
-
 interface HomePageProps {
   nextSeoProps: NextSeoProps
 }
