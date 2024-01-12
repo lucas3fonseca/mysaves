@@ -28,7 +28,6 @@ export default async function handler(
       res.status(200).json(mySave)
       
     } catch (error: unknown) {
-      console.error(error)
       if (error instanceof MySaveError) {
         res.status(500).json({ error: error.message })
       } else {

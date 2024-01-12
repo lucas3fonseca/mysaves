@@ -18,7 +18,7 @@ export const generateMySave = async (
   info: MySaveInfo,
 ): Promise<MySave> => {
   const youtubeListUrl = `
-    ${settings.YOUTUBE_VIDEOS_API_BASE_URL}?part=id,snippet&id=${info.videoId}&key=${settings.GOOGLE_API_KEY}`
+    ${settings.youtubeVideosApiBaseUrl}?part=id,snippet&id=${info.videoId}&key=${settings.googleApiKey}`
 
   const res = await axios.get(youtubeListUrl, {
     headers: {
@@ -44,6 +44,7 @@ export const generateMySave = async (
   const uploaderRes: UploadApiResponse = await cloudinary.uploader.upload(
     youtubeThumbnail.url,
     {
+      folder: settings.cloudinaryFolder,
       public_id: slug,
     },
   )

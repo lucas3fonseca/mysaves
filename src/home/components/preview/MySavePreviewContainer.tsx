@@ -16,7 +16,6 @@ const extractThumbnails = (appState: AppState) => {
 
 export const MySavePreviewContainer = () => {
   const appState = useContext(GlobalContext)
-  console.log(appState)
   return (
     <>
       {
