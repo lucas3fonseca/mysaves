@@ -9,3 +9,7 @@ export class MySaveError extends Error {
     super(`${message} : ${type}`)
   }
 }
+
+export interface ErrorResponse {
+  error: string
+}

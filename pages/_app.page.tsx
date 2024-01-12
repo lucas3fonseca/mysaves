@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           poppins.variable,
         )}
       >
-        {loading ? <div>full page loader...</div> : getLayout(<Component {...pageProps} />)}
+        {loading ? <div>loading...</div> : getLayout(<Component {...pageProps} />)}
       </main>
     </AppContextProvider>
   )
