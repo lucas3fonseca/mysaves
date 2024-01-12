@@ -11,10 +11,9 @@ interface MySavePreviewViewProps {
 }
 
 export const MySavePreviewView = ({ images }: MySavePreviewViewProps) => {
-  console.log(images)
   return (
     <>
-      {/* {
+      {
         images.map(({ image: { publicId, format, blurDataUrl }, id }) => {
           return (
             <Link
@@ -38,7 +37,7 @@ export const MySavePreviewView = ({ images }: MySavePreviewViewProps) => {
             </Link>
           )
         })
-      } */}
+      }
     </>
   )
 }
