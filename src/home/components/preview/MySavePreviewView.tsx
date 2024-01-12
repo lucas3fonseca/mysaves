@@ -11,9 +11,10 @@ interface MySavePreviewViewProps {
 }
 
 export const MySavePreviewView = ({ images }: MySavePreviewViewProps) => {
+  console.log(images)
   return (
     <>
-      {
+      {/* {
         images.map(({ image: { publicId, format, blurDataUrl }, id }) => {
           return (
             <Link
@@ -24,7 +25,6 @@ export const MySavePreviewView = ({ images }: MySavePreviewViewProps) => {
               <Image
                 alt='thumbnail'
                 className=''
-                style={{ transform: 'translate3d(0, 0, 0)' }}
                 placeholder='blur'
                 blurDataURL={blurDataUrl}
                 src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${publicId}.${format}`}
@@ -38,7 +38,7 @@ export const MySavePreviewView = ({ images }: MySavePreviewViewProps) => {
             </Link>
           )
         })
-      }
+      } */}
     </>
   )
 }
