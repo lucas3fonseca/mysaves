@@ -1,20 +1,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import type { CloudinaryImage } from '@/pages/global/interfaces'
+import type { CloudinaryImage, MySave } from '@/pages/global/interfaces'
 
 interface MySavePreviewViewProps {
-  images: {
-    id: string
-    image: CloudinaryImage
-  }[]
+  mySaves: MySave[]
 }
 
-export const MySavePreviewView = ({ images }: MySavePreviewViewProps) => {
+export const MySavePreviewView = ({ mySaves }: MySavePreviewViewProps) => {
   return (
     <>
       {
-        images.map(({ image: { publicId, format, blurDataUrl }, id }) => {
+        mySaves.map(({ cloudinaryThumbnail: { publicId, format, blurDataUrl }, id }) => {
           return (
             <Link
               key={publicId}

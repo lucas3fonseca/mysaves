@@ -49,7 +49,7 @@ export const CreateContainer = () => {
   const [{ data, loading, error }, executePost] =
     useAxios<MySave>(
       {
-        url: `${settings.API_BASE_URL}/my-save/create`,
+        url: `${settings.apiBaseUrl}/my-save/create`,
         method: 'POST'
       },
       { manual: true }
@@ -83,8 +83,8 @@ export const CreateContainer = () => {
 
   useEffect(() => {
     if (newMySave) {
-      appState[newMySave.id] = newMySave
-      dispatch(appState)
+      appState.mySaves.push(newMySave)
+      dispatch(appState.mySaves)
       router.push(`${ROUTES.MY_SAVE}/${newMySave.id}`)
     }
   }, [newMySave, dispatch, appState, router])

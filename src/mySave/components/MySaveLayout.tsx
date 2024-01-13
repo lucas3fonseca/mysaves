@@ -5,13 +5,13 @@ import { MySaveContainer } from './MySaveContainer'
 
 
 interface MySaveLayoutProps {
-  mySave: MySave
+  mySaveId: string
 }
 
-export const MySaveLayout = ({ mySave }: MySaveLayoutProps) => {
+export const MySaveLayout = ({ mySaveId }: MySaveLayoutProps) => {
   return (
     <Header>
-      <MySaveContainer mySave={mySave} />
+      <MySaveContainer mySaveId={mySaveId} />
     </Header>
   )
 }

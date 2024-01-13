@@ -2,10 +2,12 @@ import { ParsedUrlQuery } from 'querystring'
 import { GetServerSideProps } from 'next'
 import type { NextSeoProps } from 'next-seo'
 import axios from 'axios'
+import { useContext } from 'react'
 
 import { settings } from '@/pages/global/settings'
 import type { MySave } from '@/pages/global/interfaces'
 import { MySaveLayout } from '@/src/mySave/components/MySaveLayout'
+import { GlobalContext } from '@/src/global/contexts/GlobalContext'
 
 interface MySavePageQuery extends ParsedUrlQuery {
   id: string
@@ -13,12 +15,12 @@ interface MySavePageQuery extends ParsedUrlQuery {
 
 interface MySavePageProps {
   nextSeoProps: NextSeoProps
-  mySave: MySave
+  mySaveId: string
 }
 
-export default function MySavePage({ mySave }: MySavePageProps) {
+export default function MySavePage({ mySaveId }: MySavePageProps) {
   return (
-    <MySaveLayout mySave={mySave} />
+    <MySaveLayout mySaveId={mySaveId} />
   )
 }
 
@@ -32,7 +34,7 @@ export const getServerSideProps: GetServerSideProps<
     return { notFound: true }
   }
 
-  const res = await axios.get(`${settings.API_BASE_URL}/my-save/${id}`)
+  const res = await axios.get(`${settings.apiBaseUrl}/my-save/${id}`)
 
   if (res.status !== 200) {
     return { notFound: true }
@@ -62,9 +64,8 @@ export const getServerSideProps: GetServerSideProps<
 
   return {
     props: {
-      mySaveSlug: id,
+      mySaveId: id,
       nextSeoProps,
-      mySave,
     },
   }
 }

@@ -15,12 +15,12 @@ interface HeaderProps {
 export const Header = ({ title, children }: React.PropsWithChildren & HeaderProps) => {
   return (
     <>
-      <header className='bg-slate-100 sticky top-0 z-50 border-b border-slate-400'>
+      <header className='bg-black sticky top-0 z-50 border-b border-slate-400'>
         <div className='container flex h-20 items-center justify-between'>
           <Link href={ROUTES.HOME}>
             <div className='flex items-center'>
               <Image
-                src='/vercel.svg'
+                src='/mysave2.svg'
                 width={157}
                 height={42}
                 alt='MySaves Logo'

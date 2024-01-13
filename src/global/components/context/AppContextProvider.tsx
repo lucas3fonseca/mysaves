@@ -1,21 +1,22 @@
 import { ReactNode, useState, useEffect } from 'react'
 
-import { AppState } from '@/pages/global/interfaces'
+import { MySave } from '@/pages/global/interfaces'
 
 import { GlobalContext } from '../../contexts/GlobalContext'
 import { GlobalDispatchContext } from '../../contexts/GlobalDispatchContext'
 
 
 interface AppContextProviderProps extends React.PropsWithChildren {
-  state: AppState
+  mySaves: MySave[]
   children: ReactNode
 }
 
-export const AppContextProvider = ({ state, children }: AppContextProviderProps) => {
-  const [appState, setAppState] = useState<AppState>(state)
-  useEffect(() => { setAppState(state)}, [state])
+export const AppContextProvider = ({ mySaves, children }: AppContextProviderProps) => {
+  const [appState, setAppState] = useState<MySave[]>(mySaves)
+  useEffect(() => { setAppState(mySaves) }, [mySaves])
+
   return (
-    <GlobalContext.Provider value={appState}>
+    <GlobalContext.Provider value={{ mySaves: appState }}>
       <GlobalDispatchContext.Provider value={setAppState}>
         {children}
       </GlobalDispatchContext.Provider>

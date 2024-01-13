@@ -1,18 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import shortUUID from 'short-uuid'
 
-import type { MySave, MySaveInfo } from '@/pages/global/interfaces'
+import { MySave, MySaveInfo, HttpRequestMethods } from '@/pages/global/interfaces'
 import { generateMySave } from '../../_utils/generateMySave'
 import {
   MySaveError,
   MySaveErrorType,
   ErrorResponse,
 } from '../../_utils/MySaveError'
-
-enum HttpRequestMethods {
-  POST = 'POST',
-  GET = 'GET',
-}
 
 export default async function handler(
   req: NextApiRequest,
@@ -39,5 +34,7 @@ export default async function handler(
         })
       }
     }
+  } else {
+    res.status(501).send({ error: 'Unsupported request'})
   }
 }

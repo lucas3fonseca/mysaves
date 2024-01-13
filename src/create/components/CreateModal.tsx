@@ -36,7 +36,7 @@ export const CreateModal = ({ onSaveVideo, error }: CreateModalProps) => {
         type='button'
         onClick={openModal}
         className='rounded-md bg-slate-300 px-4 py-2
-        text-sm font-semibold text-black hover:bg-black/30
+        text-sm font-semibold text-black hover:bg-slate-200
         focus:outline-none focus-visible:ring-2 
         focus-visible:ring-white/75'
       >

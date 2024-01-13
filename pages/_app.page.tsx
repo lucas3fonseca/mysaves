@@ -10,7 +10,7 @@ import { cn } from '@utils/cn'
 import { AppContextProvider } from '@/src/global/components/context/AppContextProvider'
 import { poppins } from './global/fonts'
 import { settings } from './global/settings'
-import { AppState } from './global/interfaces'
+import { AppState, MySave } from './global/interfaces'
 
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
@@ -25,7 +25,7 @@ type AppPropsWithLayout = NextAppProps<{ nextSeoProps?: NextSeoProps }> & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [{ data, loading, error }] = useAxios(
-    `${settings.API_BASE_URL}/my-saves`
+    `${settings.apiBaseUrl}/my-saves`
   )
 
   if (error) {
@@ -36,25 +36,31 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     Component.getLayout ??
     ((page) => <>{page}</>)
 
-  return (
-    <AppContextProvider state={data as AppState}>
-      <NextSeo {...pageProps.nextSeoProps} />
-      {/* Need to find a better way to get fonts in headlessui/react */}
-      <style jsx global>{
-        `
-          :root {
-          --font-inter: ${poppins.style.fontFamily};
-          }
-      `}
-      </style>
-      <main
-        className={cn(
-          'min-h-screen font-sans antialiased',
-          poppins.variable,
-        )}
-      >
-        {loading ? <div>loading...</div> : getLayout(<Component {...pageProps} />)}
-      </main>
-    </AppContextProvider>
-  )
+  if (loading) {
+    return <></>
+  } else {
+    const appState: AppState = data
+    const mySaves = Object.keys(appState).map((key) => appState[key])
+    return (
+      <AppContextProvider mySaves={mySaves}>
+        <NextSeo {...pageProps.nextSeoProps} />
+        {/* Need to find a better way to get fonts in headlessui/react */}
+        <style jsx global>{
+          `
+            :root {
+            --font-inter: ${poppins.style.fontFamily};
+            }
+        `}
+        </style>
+        <main
+          className={cn(
+            'min-h-screen font-sans antialiased',
+            poppins.variable,
+          )}
+        >
+          {getLayout(<Component {...pageProps} />)}
+        </main>
+      </AppContextProvider>
+    )
+  }
 }
