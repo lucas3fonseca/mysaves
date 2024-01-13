@@ -1,19 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import shortUUID from 'short-uuid'
 
-import type { MySave, MySaveInfo } from '@/pages/global/interfaces'
-import { generateMySave } from '../../../_utils/generateMySave'
+import { HttpRequestMethods, type MySave } from '@/pages/global/interfaces'
+import { cloudinaryDestroy } from '../../../_utils/cloudinaryDestroy'
 import {
   MySaveError,
   MySaveErrorType,
   ErrorResponse,
 } from '../../../_utils/MySaveError'
-
-enum HttpRequestMethods {
-  POST = 'POST',
-  GET = 'GET',
-  DELETE = 'DELETE',
-}
 
 export default async function handler(
   req: NextApiRequest,
@@ -31,7 +25,7 @@ export default async function handler(
       })
     }
 
-    const mySave = global.state[id]
+    const mySave: MySave = global.state[id]
     if (!mySave) {
       res.status(404).json({
         error: new MySaveError(
@@ -41,9 +35,26 @@ export default async function handler(
       })
     }
 
-    delete global.state[id]
-    res.status(200).json({ id })
-    
+    try {
+
+      await cloudinaryDestroy(mySave.cloudinaryThumbnail.publicId)
+      delete global.state[id]
+      res.status(200).json({ id })
+
+    } catch (error: unknown) {
+
+      if (error instanceof MySaveError) {
+        res.status(500).json({ error: error.message })
+      } else {
+        res.status(500).json({
+          error: new MySaveError(
+            'Internal server error',
+            MySaveErrorType.MySaveInternalServerError,
+          ).message,
+        })
+      }
+    }
+  
   } else {
     res.status(501).send({ error: 'Unsupported request' })
   }

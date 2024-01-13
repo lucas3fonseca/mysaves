@@ -1,6 +1,7 @@
 export enum HttpRequestMethods {
   POST = 'POST',
   GET = 'GET',
+  DELETE = 'DELETE'
 }
 
 export interface YoutubeVideoThumbnail {
