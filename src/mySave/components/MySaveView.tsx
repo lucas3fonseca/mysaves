@@ -11,7 +11,7 @@ interface MySaveViewProps {
   onNextMySave: (e: React.FormEvent<HTMLButtonElement>) => void
 }
 
-export const MySaveView = ({ mySave, onNextMySave, disabled = false }: MySaveViewProps) => {
+export const MySaveView = ({ mySave, onNextMySave }: MySaveViewProps) => {
   return (
     <div className='flex flex-col justify-center align-middle ml-auto mr-auto w-1/2 pt-3'>
       <h1 className='text-xl font-semibold mb-3'>{mySave.title}</h1>
@@ -23,7 +23,7 @@ export const MySaveView = ({ mySave, onNextMySave, disabled = false }: MySaveVie
           onClick={() => {}}
         >
         </button>
-        
+
         <button
           onClick={onNextMySave}
         >
