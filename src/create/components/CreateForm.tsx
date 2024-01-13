@@ -35,15 +35,20 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
           </label>
           <div className='mt-2'>
             <div className='flex rounded-md shadow-sm ring-1 ring-inset
-                        ring-slate-600 focus-within:ring-2 focus-within:ring-inset
-                          sm:max-w-md'
+                  ring-slate-600 focus-within:ring-2 focus-within:ring-inset
+                    sm:max-w-md'
             >
-              <input type='text' name='videourl' id='videourl'
+              <input
+                type='text'
+                name='videourl'
+                id='videourl'
+                autoComplete='off'
                 className='block flex-1 
-                          border-0 bg-transparent py-1.5 pl-2
-                          focus:outline-none
-                          focus:ring-0 sm:text-sm sm:leading-6'
-                placeholder='https://www.youtube.com/watch?v=hGxzzVer7x0'
+                  border-0 bg-transparent py-1.5 pl-2
+                  truncate
+                  focus:outline-none overflow-ellipsis
+                  focus:ring-0 sm:text-sm sm:leading-6'
+                placeholder='https://www.youtube.com/watch?v=...'
                 onChange={(e: React.FormEvent<HTMLInputElement>) => setVideoUrl(e.currentTarget.value)}
               />
             </div>

@@ -18,14 +18,26 @@ export const MySaveView = ({ mySave, onNextMySave, onRemoveMySave }: MySaveViewP
       <h1 className='text-xl font-semibold mb-3'>{mySave.title}</h1>
       <h2>Description</h2>
       <p className='text-l mb-5 mt-5'>{mySave.description}</p>
-      <ReactPlayer url={mySave.videoUrl} muted playing volume={1} playsinline controls />
+
+      <div className='aspect-video'>
+        <ReactPlayer
+          width={'100%'}
+          height={'100%'}
+          url={mySave.videoUrl}
+          muted
+          playing
+          volume={1}
+          playsinline
+          controls
+        />
+      </div>
+
       <div className='flex justify-between mt-10'>
         <button
           onClick={onRemoveMySave}
         >
           <TrashIcon className='h-6 w-6' />
         </button>
-
         <button
           onClick={onNextMySave}
         >
