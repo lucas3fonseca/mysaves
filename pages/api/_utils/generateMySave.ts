@@ -64,7 +64,6 @@ export const generateMySave = async (
   const mySave: MySave = {
     id,
     ...info,
-    deleted: false,
     cloudinaryThumbnail: image,
     metadata: {
       id: youtubeMetadata.id,

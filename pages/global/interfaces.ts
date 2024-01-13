@@ -40,7 +40,6 @@ export interface CloudinaryImage {
 
 export interface MySave extends MySaveInfo {
   id: string
-  deleted: boolean // we'll see if this works well
   cloudinaryThumbnail: CloudinaryImage
   metadata: YoutubeVideoMetadata
 }

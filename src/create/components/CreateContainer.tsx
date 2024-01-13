@@ -86,6 +86,7 @@ export const CreateContainer = () => {
       appState.mySaves.push(newMySave)
       dispatch(appState.mySaves)
       router.push(`${ROUTES.MY_SAVE}/${newMySave.id}`)
+      setNewMySave(null)
     }
   }, [newMySave, dispatch, appState, router])
 

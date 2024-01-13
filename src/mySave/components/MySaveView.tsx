@@ -9,9 +9,10 @@ import type { MySave } from '@/pages/global/interfaces'
 interface MySaveViewProps {
   mySave: MySave
   onNextMySave: (e: React.FormEvent<HTMLButtonElement>) => void
+  onRemoveMySave: (e: React.FormEvent<HTMLButtonElement>) => void
 }
 
-export const MySaveView = ({ mySave, onNextMySave }: MySaveViewProps) => {
+export const MySaveView = ({ mySave, onNextMySave, onRemoveMySave }: MySaveViewProps) => {
   return (
     <div className='flex flex-col justify-center align-middle ml-auto mr-auto w-1/2 pt-3'>
       <h1 className='text-xl font-semibold mb-3'>{mySave.title}</h1>
@@ -20,8 +21,9 @@ export const MySaveView = ({ mySave, onNextMySave }: MySaveViewProps) => {
       <ReactPlayer url={mySave.videoUrl} muted playing volume={1} playsinline controls />
       <div className='flex justify-between mt-10'>
         <button
-          onClick={() => {}}
+          onClick={onRemoveMySave}
         >
+          <TrashIcon className='h-6 w-6' />
         </button>
 
         <button

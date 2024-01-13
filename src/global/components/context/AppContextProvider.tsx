@@ -13,7 +13,9 @@ interface AppContextProviderProps extends React.PropsWithChildren {
 
 export const AppContextProvider = ({ mySaves, children }: AppContextProviderProps) => {
   const [appState, setAppState] = useState<MySave[]>(mySaves)
-  useEffect(() => { setAppState(mySaves) }, [mySaves])
+  useEffect(() => { 
+    setAppState(appState)
+  }, [appState])
 
   return (
     <GlobalContext.Provider value={{ mySaves: appState }}>
