@@ -40,7 +40,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     return <></>
   } else {
     const appState: AppState = data
-    const mySaves = Object.keys(appState).map((key) => appState[key])
+    const mySaves = appState ? Object.keys(appState).map((key) => appState[key]) : []
     return (
       <AppContextProvider mySaves={mySaves}>
         <NextSeo {...pageProps.nextSeoProps} />
