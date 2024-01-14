@@ -31,33 +31,30 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }
 
 
-  if (loading) {
-    return <></>
-  } else {
-    const appState: AppState = data
-    const mySaves = appState ? Object.keys(appState).map((key) => appState[key]) : []
-    return (
-      <AppContextProvider mySaves={mySaves}>
-        {pageProps.nextSeoProps ? (
-          <NextSeo {...pageProps.nextSeoProps} />
-        ) : null}
-        {/* Need to find a better way to get fonts in headlessui/react */}
-        <style jsx global>{
-          `
+  const appState: AppState = data
+  const mySaves = appState ? Object.keys(appState).map((key) => appState[key]) : []
+  return (
+    <AppContextProvider mySaves={mySaves}>
+      {pageProps.nextSeoProps ? (
+        <NextSeo {...pageProps.nextSeoProps} />
+      ) : null}
+      {/* Need to find a better way to get fonts in headlessui/react */}
+      <style jsx global>{
+        `
             :root {
             --font-inter: ${poppins.style.fontFamily};
             }
         `}
-        </style>
-        <main
-          className={cn(
-            'min-h-screen font-sans antialiased',
-            poppins.variable,
-          )}
-        >
-          {<Component {...pageProps} />}
-        </main>
-      </AppContextProvider>
-    )
-  }
+      </style>
+      <main
+        className={cn(
+          'min-h-screen font-sans antialiased',
+          poppins.variable,
+        )}
+      >
+        <Component {...pageProps} />
+      </main>
+    </AppContextProvider>
+  )
+
 }
