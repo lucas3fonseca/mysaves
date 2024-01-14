@@ -83,11 +83,11 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
           <div className='mt-2'>
             <textarea id='description' name='description' rows={3}
               className='block w-full rounded-md border-0 py-1.5 
-                        bg-transparent p-2 resize-none
-                        shadow-sm ring-slate-600
-                        ring-1 ring-inset focus:ring-2
-                        focus:outline-none
-                        focus:ring-inset sm:text-sm sm:leading-6'
+                bg-transparent p-2 resize-none
+                shadow-sm ring-slate-600
+                ring-1 ring-inset focus:ring-2
+                focus:outline-none
+                focus:ring-inset sm:text-sm sm:leading-6'
               onChange={(e: React.FormEvent<HTMLTextAreaElement>) => setDescription(e.currentTarget.value)}
             />
           </div>
