@@ -7,6 +7,7 @@ import {
   MySaveErrorType,
   ErrorResponse,
 } from '../../../_utils/MySaveError'
+import { deleteStateRecord, getStateRecord } from '@/pages/api/_utils/kv'
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,9 +24,9 @@ export default async function handler(
       })
     }
 
-    const mySave: MySave = global.state[id]
+    const mySave: MySave | null = await getStateRecord(id)
     if (!mySave) {
-      res.status(404).json({
+      return res.status(404).json({
         error: new MySaveError(
           `Id not found: ${id}`,
           MySaveErrorType.MySaveNotFound,
@@ -36,15 +37,15 @@ export default async function handler(
     try {
 
       await cloudinaryDestroy(mySave.cloudinaryThumbnail.publicId)
-      delete global.state[id]
-      res.status(200).json({ id })
-
+      await deleteStateRecord(id)
+      return res.status(200).json({ id })
+      
     } catch (error: unknown) {
 
       if (error instanceof MySaveError) {
-        res.status(500).json({ error: error.message })
+        return res.status(500).json({ error: error.message })
       } else {
-        res.status(500).json({
+        return res.status(500).json({
           error: new MySaveError(
             'Internal server error',
             MySaveErrorType.MySaveInternalServerError,
@@ -54,6 +55,6 @@ export default async function handler(
     }
   
   } else {
-    res.status(501).send({ error: 'Unsupported request' })
+    return res.status(501).send({ error: 'Unsupported request' })
   }
 }
