@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { isValidYoutubeUrl } from '../utils/youtubeUrl'
+import { parseIdFromUrl } from '../utils/youtubeUrl'
 
 interface CreateFormProps {
   onSubmit: (videoUrl: string, title: string, description: string) => void
@@ -12,7 +12,7 @@ export const CreateForm = ({ onSubmit, onCancel, error }: CreateFormProps) => {
   let [title, setTitle] = useState('')
   let [description, setDescription] = useState('')
   let [submitted, setSubmitted] = useState(false)
-  const validUrl = !isValidYoutubeUrl(videoUrl)
+  const validUrl = !!parseIdFromUrl(videoUrl)
 
   const disabled = (
     videoUrl.length === 0 ||
