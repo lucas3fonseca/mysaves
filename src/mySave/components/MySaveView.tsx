@@ -36,12 +36,12 @@ export const MySaveView = ({ mySave, onNextMySave, onRemoveMySave }: MySaveViewP
         <button
           onClick={onRemoveMySave}
         >
-          <TrashIcon className='h-6 w-6' />
+          <TrashIcon className='h-6 w-6 text-mysave-pink hover:text-mysave-cyan' />
         </button>
         <button
           onClick={onNextMySave}
         >
-          <ChevronRightIcon className='h-6 w-6' />
+          <ChevronRightIcon className='h-6 w-6 text-mysave-pink font-semibold hover:text-mysave-cyan' />
         </button>
       </div>
     </div>
