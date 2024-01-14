@@ -2,9 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
 
-import { ROUTES } from 'src/global/routes'
+import { ROUTES } from '@/src/global/routes'
+import { CreateContainer } from '@/src/create/components/CreateContainer'
 
-export const Header = ({ children }: React.PropsWithChildren) => {
+interface HeaderProps extends React.PropsWithChildren {
+  create?: boolean
+}
+
+export const Header = ({ children, create = false }: HeaderProps) => {
   return (
     <>
       <header className='bg-black sticky top-0 z-50 border-b border-mysave-cyan'>
@@ -21,6 +26,9 @@ export const Header = ({ children }: React.PropsWithChildren) => {
               />
             </div>
           </Link>
+          <div>
+            {create ? <CreateContainer /> : <></>}
+          </div>
         </div>
       </header>
       {children}

@@ -25,7 +25,6 @@ export default async function handler(
     }
 
     const mySave = await getStateRecord(id)
-    console.log('fetched mysave', mySave)
     if (!mySave) {
       res.status(404).json({
         error: new MySaveError(

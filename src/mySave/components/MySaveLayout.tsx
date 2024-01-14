@@ -10,7 +10,7 @@ interface MySaveLayoutProps {
 
 export const MySaveLayout = ({ mySaveId }: MySaveLayoutProps) => {
   return (
-    <Header>
+    <Header create>
       <MySaveContainer mySaveId={mySaveId} />
     </Header>
   )
