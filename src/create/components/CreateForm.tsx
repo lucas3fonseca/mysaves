@@ -1,22 +1,24 @@
 import { useState } from 'react'
-
-// TODO: add user validation
+import { isValidYoutubeUrl } from '../utils/youtubeUrl'
 
 interface CreateFormProps {
   onSubmit: (videoUrl: string, title: string, description: string) => void
   onCancel: () => void
+  error?: string
 }
 
-export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
+export const CreateForm = ({ onSubmit, onCancel, error }: CreateFormProps) => {
   let [videoUrl, setVideoUrl] = useState('')
   let [title, setTitle] = useState('')
   let [description, setDescription] = useState('')
   let [submitted, setSubmitted] = useState(false)
+  const validUrl = !isValidYoutubeUrl(videoUrl)
 
   const disabled = (
     videoUrl.length === 0 ||
     title.length === 0 ||
     description.length === 0 ||
+    (!validUrl) ||
     submitted
   )
 
@@ -26,16 +28,18 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
     onSubmit(videoUrl, title, description)
   }
 
+  console.log(error)
+
   return (
     <form onSubmit={handleOnSubmit}>
       <div className='mt-10 text-black grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
         <div className='sm:col-span-full'>
-          <label htmlFor='videourl' className='block text-sm font-medium leading-6 '>
+          <label htmlFor='videourl' className='block text-sm text-white font-medium leading-6 '>
             Video URL
           </label>
           <div className='mt-2'>
             <div className='flex rounded-md shadow-sm ring-1 ring-inset
-                  ring-slate-600 focus-within:ring-2 focus-within:ring-inset
+                  ring-mysave-cyan focus-within:ring-2 focus-within:ring-inset
                     sm:max-w-md'
             >
               <input
@@ -45,30 +49,35 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
                 autoComplete='off'
                 className='block flex-1 
                   border-0 bg-transparent py-1.5 pl-2
-                  truncate
+                  truncate text-white
                   focus:outline-none overflow-ellipsis
                   focus:ring-0 sm:text-sm sm:leading-6'
                 placeholder='https://www.youtube.com/watch?v=...'
                 onChange={(e: React.FormEvent<HTMLInputElement>) => setVideoUrl(e.currentTarget.value)}
               />
             </div>
+            {(!validUrl && videoUrl.length > 0) &&
+              <div className='font-sm mt-1 text-mysave-red'>
+                Invalid YouTube video URL.
+              </div>
+            }
           </div>
         </div>
 
         <div className='sm:col-span-full'>
-          <label htmlFor='title' className='block text-sm font-medium leading-6 '>
+          <label htmlFor='title' className='block text-sm text-white font-medium leading-6 '>
             Title
           </label>
           <div className='mt-2'>
             <div className='flex rounded-md shadow-sm ring-1 ring-inset
-                        ring-slate-600 focus-within:ring-2 focus-within:ring-inset
-                          sm:max-w-md'
+                  ring-mysave-cyan focus-within:ring-2 focus-within:ring-inset
+                    sm:max-w-md'
             >
               <input type='text' name='title' id='title'
-                className='block flex-1
-                            border-0 bg-transparent py-1.5 pl-2
-                            focus:outline-none
-                            focus:ring-0 sm:text-sm sm:leading-6'
+                className='block flex-1 text-white
+                  border-0 bg-transparent py-1.5 pl-2
+                  focus:outline-none
+                  focus:ring-0 sm:text-sm sm:leading-6'
                 placeholder='Title...'
                 onChange={(e: React.FormEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)}
               />
@@ -77,40 +86,48 @@ export const CreateForm = ({ onSubmit, onCancel }: CreateFormProps) => {
         </div>
 
         <div className='col-span-full'>
-          <label htmlFor='description' className='block text-sm font-medium leading-6'>
+          <label htmlFor='description' className='block text-sm text-white font-medium leading-6'>
             Description
           </label>
           <div className='mt-2'>
-            <textarea id='description' name='description' rows={3}
-              className='block w-full rounded-md border-1 py-1.5 
+            <div className='rounded-md shadow-sm ring-1 ring-inset
+                  ring-mysave-cyan focus-within:ring-2 focus-within:ring-inset
+                    sm:max-w-md
+              '>
+              <textarea id='description' name='description' rows={3}
+                className='block text-white w-full rounded-md border-1 py-1.5 
                 bg-transparent p-2 resize-none
-                shadow-sm ring-slate-600
+                shadow-sm ring-mysave-cyan
                 ring-1 ring-inset focus:ring-2
                 focus:outline-none
                 focus:ring-inset sm:text-sm sm:leading-6'
-              onChange={(e: React.FormEvent<HTMLTextAreaElement>) => setDescription(e.currentTarget.value)}
-            />
+                onChange={(e: React.FormEvent<HTMLTextAreaElement>) => setDescription(e.currentTarget.value)}
+              />
+            </div>
           </div>
         </div>
       </div>
 
       <div className='mt-6 flex items-center justify-center gap-x-6'>
         <button type='button'
-          className='text-sm font-semibold leading-6 
-          text-black bg-red-300 border border-slate-300 rounded-md
-          hover:bg-red-400 px-2 py-1 
-            focus-visible:outline-2 focus-visible:outline-offset-2'
+          className='bg-black px-4 py-2
+            border border-mysave-red rounded-full
+            text-sm font-semibold text-white
+          enabled:hover:bg-mysave-red enabled:hover:text-black
+          focus-visible:ring-white/75'
           onClick={onCancel}
         >
           Cancel
         </button>
         <button type='submit'
           disabled={disabled}
-          className='rounded-md bg-slate-300 px-3 py-2 text-sm font-semibold 
-          text-black enabled:hover:bg-slate-500 focus-visible:outline
-            focus-visible:outline-2 focus-visible:outline-offset-2
-          disabled:text-slate-100 disabled:cursor-not-allowed'
-        >
+          className='bg-black px-4 py-2
+            border border-mysave-cyan rounded-full
+            text-sm font-semibold text-white 
+          enabled:hover:bg-mysave-cyan enabled:hover:text-black
+          focus-visible:ring-white/75 disabled:cursor-not-allowed
+          disabled:hover:border-slate-400
+        '>
           Save
         </button>
       </div>

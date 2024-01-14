@@ -1,9 +1,7 @@
-import { poppins } from '@/pages/global/fonts'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 
 import { CreateForm } from './CreateForm'
-import { SaveInfo } from '../interfaces/create'
 
 interface CreateModalProps {
   onSaveVideo: (videoUrl: string, title: string, description: string) => void
@@ -22,6 +20,10 @@ export const CreateModal = ({ onSaveVideo, error }: CreateModalProps) => {
   }
 
   const saveVideo = (videoUrl: string, title: string, description: string) => {
+    if (error) {
+      return
+    }
+
     onSaveVideo(
       videoUrl,
       title,
@@ -47,7 +49,11 @@ export const CreateModal = ({ onSaveVideo, error }: CreateModalProps) => {
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as='div' className={`relative z-50`} onClose={closeModal}>
+        <Dialog
+          as='div'
+          className='relative z-50'
+          onClose={closeModal}
+        >
           <Transition.Child
             as={Fragment}
             enter='ease-out duration-300'
@@ -73,18 +79,18 @@ export const CreateModal = ({ onSaveVideo, error }: CreateModalProps) => {
               >
                 <Dialog.Panel
                   className='w-full max-w-md transform overflow-hidden
-                    overflow-y-auto h-full
-                    rounded-2xl bg-white p-6 text-left align-middle 
+                    overflow-y-auto h-full border border-mysave-pink
+                    rounded-2xl bg-black p-6 text-left align-middle 
                     shadow-xl transition-all'
                 >
                   <Dialog.Title
                     as='h3'
-                    className='text-lg font-medium leading-6 text-gray-900'
+                    className='text-lg font-medium leading-6 text-white'
                   >
                     Save a video!
                   </Dialog.Title>
 
-                  <CreateForm onSubmit={saveVideo} onCancel={closeModal} />
+                  <CreateForm onSubmit={saveVideo} onCancel={closeModal} error={error} />
                 </Dialog.Panel>
               </Transition.Child>
             </div>

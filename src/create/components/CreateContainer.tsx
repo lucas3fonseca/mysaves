@@ -9,36 +9,7 @@ import { GlobalDispatchContext } from '@/src/global/contexts/GlobalDispatchConte
 import { GlobalContext } from '@/src/global/contexts/GlobalContext'
 
 import { CreateModal } from './CreateModal'
-
-
-
-const YOUTUBE_VIDEO_URL_IDENTIFIER = 'watch?v='
-const YOUTUBE_SHORT_URL_IDENTIFIER = 'shorts/'
-const YOUTUBE_VIDEO_URL_FORMAT = 'https://youtube.com/watch?v='
-const YOUTUBE_SHORT_URL_FORMAT = 'https://youtube.com/shorts/'
-
-// Probably use a regex for this in the future
-const parseIdFromUrl = (url: string): string | null => {
-  url = url.replace('www.', '')
-  const is_video = url.includes(YOUTUBE_VIDEO_URL_FORMAT) ? true : false
-  const is_short = url.includes(YOUTUBE_SHORT_URL_FORMAT) ? true : false
-
-  if (!is_video && !is_short) {
-    return null
-  }
-
-  const parts = (
-    is_video ?
-      url.split(YOUTUBE_VIDEO_URL_IDENTIFIER) :
-      url.split(YOUTUBE_SHORT_URL_IDENTIFIER)
-  )
-
-  if (parts.length < 2) {
-    return null
-  } else {
-    return parts.pop() ?? null
-  }
-}
+import { parseIdFromUrl } from '../utils/youtubeUrl'
 
 export const CreateContainer = () => {
   const router = useRouter()
@@ -59,7 +30,7 @@ export const CreateContainer = () => {
   const saveVideo = async (videoUrl: string, title: string, description: string) => {
     const parsedId = parseIdFromUrl(videoUrl)
     if (!parsedId) {
-      setUrlError('Invalid YouTube video url.')
+      setUrlError('Invalid YouTube video URL.')
       return
     }
 
@@ -89,5 +60,5 @@ export const CreateContainer = () => {
     }
   }, [newMySave, dispatch, appState, router])
 
-  return <CreateModal onSaveVideo={saveVideo} error={urlError || error?.message} />
+  return <CreateModal onSaveVideo={saveVideo} error={urlError || undefined} />
 }

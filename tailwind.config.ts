@@ -22,6 +22,7 @@ const config: Config = {
       colors: {
         'mysave-cyan': '#07E0FE',
         'mysave-pink': '#F608D1',
+        'mysave-red': '#E11D48'
       },
     },
     plugins: [],
