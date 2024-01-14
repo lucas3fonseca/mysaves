@@ -6,14 +6,13 @@ import {
   MySaveErrorType,
   ErrorResponse,
 } from '../../_utils/MySaveError'
+import { getStateRecord } from '../../_utils/kv'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<MySave | ErrorResponse>,
 ) {
   const id = req.query.id as string
-
-  console.log('my-save/id global state:', JSON.stringify(global.state))
 
   if (req.method === HttpRequestMethods.GET) {
     if (!id || typeof id !== 'string') {
@@ -25,7 +24,7 @@ export default async function handler(
       })
     }
 
-    const mySave = global.state[id]
+    const mySave = await getStateRecord(id)
     if (!mySave) {
       res.status(404).json({
         error: new MySaveError(
@@ -33,9 +32,9 @@ export default async function handler(
           MySaveErrorType.MySaveNotFound,
         ).message,
       })
+    } else {
+      res.status(200).json(mySave)
     }
-
-    res.status(200).json(mySave)
 
   } else {
     res.status(501).json({ error: 'Unsupported request' })

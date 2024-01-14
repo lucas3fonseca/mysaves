@@ -1,8 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import shortUUID from 'short-uuid'
 
-import { MySave, MySaveInfo, HttpRequestMethods } from '@/pages/global/interfaces'
+import {
+  MySave,
+  MySaveInfo,
+  HttpRequestMethods,
+} from '@/pages/global/interfaces'
 import { generateMySave } from '../../_utils/generateMySave'
+import { setState } from '../../_utils/kv'
 import {
   MySaveError,
   MySaveErrorType,
@@ -14,15 +19,14 @@ export default async function handler(
   res: NextApiResponse<MySave | ErrorResponse>,
 ) {
   const mySaveInfo = req.body as MySaveInfo
-  console.log('my-save/create global state:', JSON.stringify(global.state))
   if (req.method === HttpRequestMethods.POST) {
     const id = shortUUID.generate()
 
     try {
       const mySave: MySave = await generateMySave(id, mySaveInfo)
-      global.state[id] = mySave
+      await setState({ [id]: mySave })
       res.status(200).json(mySave)
-      
+
     } catch (error: unknown) {
       if (error instanceof MySaveError) {
         res.status(500).json({ error: error.message })
@@ -36,6 +40,6 @@ export default async function handler(
       }
     }
   } else {
-    res.status(501).send({ error: 'Unsupported request'})
+    res.status(501).send({ error: 'Unsupported request' })
   }
 }

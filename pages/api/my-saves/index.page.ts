@@ -13,5 +13,4 @@ export default function handler(
   } else {
     res.status(501).json({ error: 'Unsupported request' })
   }
-  
 }

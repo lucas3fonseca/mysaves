@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import shortUUID from 'short-uuid'
 
 import { HttpRequestMethods, type MySave } from '@/pages/global/interfaces'
 import { cloudinaryDestroy } from '../../../_utils/cloudinaryDestroy'
@@ -14,7 +13,6 @@ export default async function handler(
   res: NextApiResponse<{ id: string } | ErrorResponse>,
 ) {
   const id = req.query.id as string
-  console.log('my-save/delete/id global state:', JSON.stringify(global.state))
   if (req.method === HttpRequestMethods.DELETE) {
     if (!id || typeof id !== 'string') {
       res.status(404).json({
