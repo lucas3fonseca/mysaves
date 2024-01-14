@@ -1,2 +1,2 @@
 export const DEFAULT_OPENGRAPH_IMAGE =
-  'https://i.ytimg.com/vi/BcpZUSbaiO4/sddefault.jpg'
+  'https://res.cloudinary.com/dkwuzmd95/image/upload/v1705253293/image-gallery/mysave1_wtot5k.svg'

@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps<
   }
 
   const mySave: MySave = res.data
-  console.log(mySave)
+  console.log(`cloudinary url: ${mySave.cloudinaryThumbnail.secureUrl}`)
 
   const nextSeoProps: NextSeoProps = {
     title: `MySaves | ${mySave.title}`,
@@ -51,8 +51,8 @@ export const getServerSideProps: GetServerSideProps<
       description: `${mySave.description}`,
       images: [
         {
-          url: `${mySave.cloudinaryThumbnail.secureUrl}`,
-          alt: `${mySave.cloudinaryThumbnail.secureUrl}`,
+          url: `${mySave.metadata.snippet.thumbnails.standard.url}`,
+          alt: `${mySave.title}`,
         },
       ],
       site_name: 'MySaves',
