@@ -19,6 +19,10 @@ const config: Config = {
         sans: ['var(--font-inter)', ...fontFamily.sans],
         heading: ['var(--font-poppins)', ...fontFamily.sans],
       },
+      colors: {
+        'mysave-cyan': '#07E0FE',
+        'mysave-pink': '#F608D1',
+      },
     },
     plugins: [],
   },

@@ -4,12 +4,10 @@ import * as React from 'react'
 
 import { ROUTES } from 'src/global/routes'
 
-import { CreateContainer } from 'src/create/components/CreateContainer'
-
 export const Header = ({ children }: React.PropsWithChildren) => {
   return (
     <>
-      <header className='bg-black sticky top-0 z-50 border-b border-slate-400'>
+      <header className='bg-black sticky top-0 z-50 border-b border-mysave-cyan'>
         <div className='container flex h-20 items-center justify-between'>
           <Link href={ROUTES.HOME}>
             <div className='flex items-center'>
@@ -23,7 +21,6 @@ export const Header = ({ children }: React.PropsWithChildren) => {
               />
             </div>
           </Link>
-          <CreateContainer />
         </div>
       </header>
       {children}

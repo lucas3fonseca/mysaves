@@ -32,16 +32,19 @@ export const CreateModal = ({ onSaveVideo, error }: CreateModalProps) => {
 
   return (
     <>
-      <button
-        type='button'
-        onClick={openModal}
-        className='rounded-md bg-slate-300 px-4 py-2
-        text-sm font-semibold text-black hover:bg-slate-200
-        focus:outline-none focus-visible:ring-2 
-        focus-visible:ring-white/75'
-      >
-        Save!
-      </button>
+      <div className='m-auto'>
+        <button
+          type='button'
+          onClick={openModal}
+          className='bg-black px-4 py-2
+            border border-mysave-pink rounded-full
+            text-sm font-semibold text-white 
+            hover:bg-mysave-pink hover:text-black
+          focus-visible:ring-white/75'
+        >
+          Save video
+        </button>
+      </div>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className={`relative z-50`} onClose={closeModal}>
@@ -80,7 +83,7 @@ export const CreateModal = ({ onSaveVideo, error }: CreateModalProps) => {
                   >
                     Save a video!
                   </Dialog.Title>
-                  
+
                   <CreateForm onSubmit={saveVideo} onCancel={closeModal} />
                 </Dialog.Panel>
               </Transition.Child>
