@@ -1,5 +1,5 @@
 import {
-  ChevronRightIcon,
+  ArrowRightCircleIcon,
   TrashIcon,
 } from '@heroicons/react/24/outline'
 import ReactPlayer from 'react-player/lazy'
@@ -35,14 +35,14 @@ export const MySaveView = ({ mySave, onNextMySave, onRemoveMySave }: MySaveViewP
         <button
           onClick={onRemoveMySave}
         >
-          <TrashIcon className='h-8 w-8 text-mysave-pink
+          <TrashIcon className='h-6 w-6 text-mysave-pink
             hover:text-mysave-cyan active:text-mysave-pink focus:text-mysave-pink'
           />
         </button>
         <button
           onClick={onNextMySave}
         >
-          <ChevronRightIcon className='h-8 w-8 text-mysave-pink font-semibold 
+          <ArrowRightCircleIcon className='h-6 w-6 text-mysave-pink font-semibold 
             hover:text-mysave-cyan  active:text-mysave-pink focus:text-mysave-pink'
           />
         </button>
