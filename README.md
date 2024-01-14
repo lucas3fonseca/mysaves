@@ -1,40 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MySaves
 
-## Getting Started
+## Local Development
 
-First, run the development server:
+### Prerequisites
+
+You will need a cloudinary account, a YouTube developer account, and a Vercel account with a deployed Vercel KV store.
+
+You will also need a local `.env.local` file with the following variables:
 
 ```bash
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+CLOUDINARY_FOLDER=
+YOUTUBE_VIDEOS_API_BASE_URL=
+GOOGLE_API_KEY=
+KV_URL=
+KV_REST_API_URL=
+KV_REST_API_TOKEN=
+```
+Commands:
+```bash
+npm install
+npm run build
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in the browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Deployed on Vercel
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The app is deployed on Vercel and can be found here [MySaves](https://mysaves-eight.vercel.app])
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Storage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Due to time constraints all persistent state is being stored in [Vercel KV](https://vercel.com/docs/storage/vercel-kv) store instead of a database.
 
-## Learn More
+## Future Improvements
 
-To learn more about Next.js, take a look at the following resources:
+- The image blur loader isn't quite working as expected and can use improvements.
+- The server state should be moved to a database to more efficiently retrieve the data, sort it properly, and paginate it.
+- Client-side state should use a more robust state management tool like redux.
+- User sessions should be implemented other users can't delete each other's videos.
+- The components should be more segregated and modularized to improve reusability.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Screenshots
