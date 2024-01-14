@@ -11,7 +11,6 @@ export const MySavePreviewView = ({ mySaves }: MySavePreviewViewProps) => {
   return (
     <>
       {
-
         mySaves.map(({ cloudinaryThumbnail: { publicId, format, blurDataUrl }, id }) => {
           return (
             <div key={publicId}

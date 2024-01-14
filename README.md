@@ -38,7 +38,7 @@ Due to time constraints all persistent state is being stored in [Vercel KV](http
 
 ## Future Improvements
 
-- The image blur loader isn't quite working as expected and can use improvements.
+- Add caching
 - The server state should be moved to a database to more efficiently retrieve the data, sort it properly, and paginate it.
 - Client-side state should use a more robust state management tool like redux.
 - User sessions should be implemented other users can't delete each other's videos.
