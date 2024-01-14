@@ -11,6 +11,7 @@ export const MySavePreviewView = ({ mySaves }: MySavePreviewViewProps) => {
   return (
     <>
       {
+
         mySaves.map(({ cloudinaryThumbnail: { publicId, format, blurDataUrl }, id }) => {
           return (
             <Link
@@ -20,12 +21,12 @@ export const MySavePreviewView = ({ mySaves }: MySavePreviewViewProps) => {
             >
               <Image
                 alt='thumbnail'
-                className=''
+                className='border-transparent rounded-xl'
                 placeholder='blur'
                 blurDataURL={blurDataUrl}
                 src={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/c_scale,w_720/${publicId}.${format}`}
-                width={720}
-                height={480}
+                width={520}
+                height={380}
                 sizes='(max-width: 640px) 100vw,
                 (max-width: 1280px) 50vw,
                 (max-width: 1536px) 33vw,

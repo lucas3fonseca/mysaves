@@ -3,7 +3,7 @@ import { MySavePreviewContainer } from './preview/MySavePreviewContainer'
 
 export const HomeView = () => {
   return (
-    <>
+    <div className='flex space-x-4 flex-wrap'>
       <div className='
         mt-5 ml-5 bg-gradient-to-b from-mysave-cyan
         border-transparent rounded-xl
@@ -16,9 +16,8 @@ export const HomeView = () => {
           <CreateContainer />
         </div>
       </div>
-      <div>
-        <MySavePreviewContainer />
-      </div>
-    </>
+
+      <MySavePreviewContainer />
+    </div>
   )
 }
