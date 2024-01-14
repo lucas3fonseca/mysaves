@@ -41,6 +41,7 @@ export const getServerSideProps: GetServerSideProps<
   }
 
   const mySave: MySave = res.data
+  console.log(mySave)
 
   const nextSeoProps: NextSeoProps = {
     title: `MySaves | ${mySave.title}`,
