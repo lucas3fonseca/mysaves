@@ -14,10 +14,9 @@ interface MySaveViewProps {
 
 export const MySaveView = ({ mySave, onNextMySave, onRemoveMySave }: MySaveViewProps) => {
   return (
-    <div className='flex flex-col justify-center align-middle ml-auto mr-auto w-1/2 pt-3'>
-      <h1 className='text-xl font-semibold mb-3'>{mySave.title}</h1>
-      <h2>Description</h2>
-      <p className='text-l mb-5 mt-5'>{mySave.description}</p>
+    <div className='flex flex-col justify-center align-middle ml-auto mr-auto w-5/6 pt-3'>
+      <h1 className='text-3xl font-semibold mb-3'>{mySave.title}</h1>
+      <p className='text-sm mb-5 mt-5'>{mySave.description}</p>
 
       <div className='aspect-video'>
         <ReactPlayer
@@ -32,7 +31,7 @@ export const MySaveView = ({ mySave, onNextMySave, onRemoveMySave }: MySaveViewP
         />
       </div>
 
-      <div className='flex justify-between mt-10'>
+      <div className='flex justify-between mt-5 mb-5'>
         <button
           onClick={onRemoveMySave}
         >
