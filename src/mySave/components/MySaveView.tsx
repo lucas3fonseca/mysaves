@@ -42,7 +42,7 @@ export const MySaveView = ({ mySave, onNextMySave, onRemoveMySave }: MySaveViewP
         <button
           onClick={onNextMySave}
         >
-          <ArrowRightCircleIcon className='h-6 w-6 text-mysave-pink font-semibold 
+          <ArrowRightCircleIcon className='h-7 w-7 text-mysave-pink font-semibold 
             hover:text-mysave-cyan  active:text-mysave-pink focus:text-mysave-pink'
           />
         </button>
