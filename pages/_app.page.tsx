@@ -43,7 +43,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     const mySaves = appState ? Object.keys(appState).map((key) => appState[key]) : []
     return (
       <AppContextProvider mySaves={mySaves}>
-        <NextSeo {...pageProps.nextSeoProps} />
+        {pageProps.nextSeoProps ? (
+          <NextSeo {...pageProps.nextSeoProps} />
+        ) : null}
         {/* Need to find a better way to get fonts in headlessui/react */}
         <style jsx global>{
           `
