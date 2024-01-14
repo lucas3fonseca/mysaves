@@ -58,7 +58,7 @@ export const CreateContainer = () => {
 
   const saveVideo = async (videoUrl: string, title: string, description: string) => {
     const parsedId = parseIdFromUrl(videoUrl)
-    console.log('here')
+    console.log('in saveVideo')
     if (!parsedId) {
       setUrlError('Invalid YouTube video url.')
       return
@@ -70,6 +70,8 @@ export const CreateContainer = () => {
       videoUrl,
       videoId: parsedId,
     }
+
+    console.log('about to execute post')
 
     const mySave = await executePost({
       data: mySaveInfo,
