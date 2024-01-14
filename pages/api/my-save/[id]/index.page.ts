@@ -13,6 +13,8 @@ export default async function handler(
 ) {
   const id = req.query.id as string
 
+  console.log('my-save/id global state:', JSON.stringify(global.state))
+
   if (req.method === HttpRequestMethods.GET) {
     if (!id || typeof id !== 'string') {
       res.status(404).json({

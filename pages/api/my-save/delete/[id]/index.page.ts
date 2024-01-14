@@ -14,7 +14,7 @@ export default async function handler(
   res: NextApiResponse<{ id: string } | ErrorResponse>,
 ) {
   const id = req.query.id as string
-
+  console.log('my-save/delete/id global state:', JSON.stringify(global.state))
   if (req.method === HttpRequestMethods.DELETE) {
     if (!id || typeof id !== 'string') {
       res.status(404).json({

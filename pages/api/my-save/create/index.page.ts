@@ -14,6 +14,7 @@ export default async function handler(
   res: NextApiResponse<MySave | ErrorResponse>,
 ) {
   const mySaveInfo = req.body as MySaveInfo
+  console.log('my-save/create global state:', JSON.stringify(global.state))
   if (req.method === HttpRequestMethods.POST) {
     const id = shortUUID.generate()
 
