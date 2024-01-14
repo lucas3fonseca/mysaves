@@ -34,10 +34,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const appState: AppState = data
   const mySaves = appState ? Object.keys(appState).map((key) => appState[key]) : []
   return (
-    <AppContextProvider mySaves={mySaves}>
-      {pageProps.nextSeoProps ? (
-        <NextSeo {...pageProps.nextSeoProps} />
-      ) : null}
+    <>
+      {
+        pageProps.nextSeoProps ? (
+          <NextSeo {...pageProps.nextSeoProps} />
+        ) : null
+      }
       {/* Need to find a better way to get fonts in headlessui/react */}
       <style jsx global>{
         `
@@ -52,9 +54,14 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           poppins.variable,
         )}
       >
-        <Component {...pageProps} />
+        {
+          loading ? <></> :
+          <AppContextProvider mySaves={mySaves}>
+            <Component {...pageProps} />
+          </AppContextProvider>
+        }
       </main>
-    </AppContextProvider>
+    </>
   )
 
 }
