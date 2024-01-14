@@ -79,7 +79,7 @@ export const CreateModal = ({ onSaveVideo, error }: CreateModalProps) => {
               >
                 <Dialog.Panel
                   className='w-full max-w-md transform overflow-hidden
-                    overflow-y-auto h-full border border-mysave-pink
+                    overflow-y-auto sm:overflow-y-scroll h-full border border-mysave-pink
                     rounded-2xl bg-black p-6 text-left align-middle 
                     shadow-xl transition-all'
                 >
