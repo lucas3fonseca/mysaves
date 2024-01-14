@@ -15,9 +15,7 @@ import { AppState, MySave } from './global/interfaces'
 export type NextPageWithLayout<
   TProps = Record<string, unknown>,
   TInitialProps = TProps,
-> = NextPage<TProps, TInitialProps> & {
-  getLayout?: (page: ReactElement) => ReactNode
-}
+> = NextPage<TProps, TInitialProps>
 
 type AppPropsWithLayout = NextAppProps<{ nextSeoProps?: NextSeoProps }> & {
   Component: NextPageWithLayout
@@ -32,9 +30,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     return { not_found: true }
   }
 
-  const getLayout =
-    Component.getLayout ??
-    ((page) => <>{page}</>)
 
   if (loading) {
     return <></>
@@ -60,7 +55,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             poppins.variable,
           )}
         >
-          {getLayout(<Component {...pageProps} />)}
+          {<Component {...pageProps} />}
         </main>
       </AppContextProvider>
     )

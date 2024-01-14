@@ -11,7 +11,7 @@ interface HomePageProps {
 
 export default function HomePage({}: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <></>
+    <HomeLayout />
   )
 }
 
