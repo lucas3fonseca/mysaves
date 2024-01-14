@@ -51,7 +51,7 @@ export const getServerSideProps: GetServerSideProps<
       description: `${mySave.description}`,
       images: [
         {
-          url: `${mySave.metadata.snippet.thumbnails.standard.url}`,
+          url: `${mySave.cloudinaryThumbnail.secureUrl}`,
           alt: `${mySave.title}`,
         },
       ],
