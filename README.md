@@ -49,3 +49,7 @@ Be aware: when a mobile device is on low power mode the video will attempt to au
 but the operating system will immediately pause the video.
 
 ## Screenshots
+<img width="1251" alt="Screenshot 2024-01-15 at 10 22 56 AM" src="https://github.com/lucas3fonseca/mysaves/assets/11895103/5cf30c93-320f-4da8-9acd-9c980a676df9">
+<img width="1247" alt="Screenshot 2024-01-15 at 10 52 29 AM" src="https://github.com/lucas3fonseca/mysaves/assets/11895103/31c34237-39e7-4d30-8eb3-3a6d677fdf12">
+<img width="1242" alt="Screenshot 2024-01-15 at 10 52 44 AM" src="https://github.com/lucas3fonseca/mysaves/assets/11895103/344fb003-7205-46c0-8c67-5db5e336a535">
+
