@@ -25,7 +25,7 @@ export const MySaveView = ({ mySave, onNextMySave, onRemoveMySave }: MySaveViewP
           url={mySave.videoUrl}
           muted
           playing
-          volume={0}
+          volume={1}
           playsinline
           controls
         />
