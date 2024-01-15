@@ -30,7 +30,7 @@ Open [http://localhost:3000](http://localhost:3000) in the browser to see the re
 
 ## Deployed on Vercel
 
-The app is deployed on Vercel and can be found here [MySaves](https://mysaves-eight.vercel.app])
+The app is deployed on Vercel and can be found here [MySaves](https://mysaves-eight.vercel.app)
 
 ## Storage
 
@@ -42,5 +42,10 @@ Due to time constraints all persistent state is being stored in [Vercel KV](http
 - Client-side state should use a more robust state management tool like redux.
 - User sessions should be implemented other users can't delete each other's videos.
 - The components should be more segregated and modularized to improve reusability.
+
+## Limitations for Mobile Low Power Mode
+
+Be aware: when a mobile device is on low power mode the video will attempt to autoplay
+but the operating system will immediately pause the video.
 
 ## Screenshots
