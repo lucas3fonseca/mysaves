@@ -26,7 +26,7 @@ export const MySaveView = ({ mySave, onNextMySave, onRemoveMySave }: MySaveViewP
           muted
           playing
           volume={1}
-          playsinline
+          playsinline={true}
           controls
         />
       </div>
