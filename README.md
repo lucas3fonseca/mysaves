@@ -52,4 +52,8 @@ but the operating system will immediately pause the video.
 <img width="1251" alt="Screenshot 2024-01-15 at 10 22 56 AM" src="https://github.com/lucas3fonseca/mysaves/assets/11895103/5cf30c93-320f-4da8-9acd-9c980a676df9">
 <img width="1247" alt="Screenshot 2024-01-15 at 10 52 29 AM" src="https://github.com/lucas3fonseca/mysaves/assets/11895103/31c34237-39e7-4d30-8eb3-3a6d677fdf12">
 <img width="1242" alt="Screenshot 2024-01-15 at 10 52 44 AM" src="https://github.com/lucas3fonseca/mysaves/assets/11895103/344fb003-7205-46c0-8c67-5db5e336a535">
+![image_6487327 (1)](https://github.com/lucas3fonseca/mysaves/assets/11895103/e076ce21-8b49-45fe-b030-dde2009462f9)
+![image_6487327 (2)](https://github.com/lucas3fonseca/mysaves/assets/11895103/1a14fb51-3aab-4914-ba53-9fe2fe08a6d8)
+![image_6487327](https://github.com/lucas3fonseca/mysaves/assets/11895103/cf1a96d0-0183-40b6-b30f-ddaf5473a839)
+
 
